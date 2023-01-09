@@ -3,3 +3,7 @@
 
 @import url(../src/blocks/header/header.css);
 @import url(../src/blocks/navbar/navbar.css);
+@import url(../src/blocks/navbar/__link/navbar__link.css);
+@import url(../src/blocks/navbar/__link/_active/navbar__link_active.css);
+@import url(../src/blocks/navbar/__account-button/navbar__account-button.css);
+@import url(../src/blocks/navbar/__account-span/navbar__account-span.css);

@@ -1,0 +1,12 @@
+.navbar__account-button{
+  background-color: #1D1D1D;
+  padding: 0;
+  border: none;
+  border-radius: 40px;
+  width: 100px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.08);
+}

@@ -6,3 +6,7 @@
   line-height: 138%;
   color: #ffffff;
 }
+
+.navbar__link:first-of-type{
+  margin-right: 16px;
+}

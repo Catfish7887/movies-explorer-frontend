@@ -1,0 +1,12 @@
+.navbar__signin-button {
+  padding: 8px 20px;
+  background-color: #3ddc84;
+  border: none;
+  border-radius: 3px;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 133%;
+  margin-left: 14px;
+}

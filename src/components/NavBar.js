@@ -1,18 +1,18 @@
 import { NavLink } from 'react-router-dom';
 
 function NavBar() {
-
-  const isLoggedIn = true;
+  const isLoggedIn = false;
 
   return (
-    <div className='navbar'>
-      <nav className="navbar__links">
-        <a className='navbar__link'>Фильмы</a>
-        <a className='navbar__link'>Сохранённые Фильмы</a>
-      </nav>
-      {isLoggedIn ? <nav className="navbar__buttons">
-          <button aria-label="Акканут" className='navbar__account-button'>
-          <span className='navbar__account-span'>Акканут</span>
+    <div className="navbar">
+      {isLoggedIn ? (
+        <>
+          <nav className="navbar__links">
+            <a className="navbar__link">Фильмы</a>
+            <a className="navbar__link">Сохранённые Фильмы</a>
+          </nav>
+          <button aria-label="Акканут" className="navbar__account-button">
+            <span className="navbar__account-span">Акканут</span>
             <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect width="26" height="26" rx="13" fill="#313131" />
               <path
@@ -23,7 +23,13 @@ function NavBar() {
               />
             </svg>
           </button>
-      </nav> : null}
+        </>
+      ) : (
+        <div className="navbar__buttons">
+          <a className="navbar__link">Регистрация</a>
+          <button className="navbar__signin-button">Войти</button>
+        </div>
+      )}
     </div>
   );
 }

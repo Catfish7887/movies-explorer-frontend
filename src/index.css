@@ -10,3 +10,5 @@
 @import url(../src/blocks/navbar/__links/navbar__links.css);
 @import url(../src/blocks/navbar/__buttons/navbar__buttons.css);
 @import url(../src/blocks/navbar/__signin-button/navbar__signin-button.css);
+
+@import url(../src/components/LandingHeader/LandingHeader.css);

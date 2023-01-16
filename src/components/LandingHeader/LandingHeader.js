@@ -1,19 +1,16 @@
-
 import headerLogo from '../../images/header-logo.svg';
 
 function LandingHeader() {
-  return(
+  return (
     <section className="landing-header">
       <div className="landing-header__content">
-      <h1 className="landing-header__heading">1</h1>
-      <span className="landing-header__span">12</span>
-      <svg>
-        <use href={headerLogo} />
-      </svg>
+        <h1 className="landing-header__heading">Учебный проект студента факультета Веб&#8209;разработки.</h1>
+        <span className="landing-header__span">Листайте ниже, чтобы узнать больше про этот проект и&nbsp;его создателя.</span>
+        <img className='landing-header__logo' src={headerLogo}  alt='Логотип' />
       </div>
-
+      <button className='landing-header__button'>Узнать больше</button>
     </section>
   );
-};
+}
 
 export default LandingHeader;

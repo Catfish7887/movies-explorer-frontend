@@ -1,4 +1,5 @@
 @import url(../src/vendor/normalize.css);
+@import url(../src/vendor/fonts/Inter/inter.css);
 @import url(../src/blocks/root/root.css);
 
 @import url(../src/blocks/header/header.css);
@@ -11,4 +12,7 @@
 @import url(../src/blocks/navbar/__buttons/navbar__buttons.css);
 @import url(../src/blocks/navbar/__signin-button/navbar__signin-button.css);
 
+@import url(../src/components/Main/Main.css);
 @import url(../src/components/LandingHeader/LandingHeader.css);
+@import url(../src/components/About/About.css);
+@import url(../src/components/Tech/Tech.css);

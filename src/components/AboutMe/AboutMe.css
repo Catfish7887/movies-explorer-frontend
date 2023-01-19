@@ -1,0 +1,70 @@
+.about-me {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 110px 70px 100px;
+}
+
+.about-me__content {
+  display: grid;
+  grid-template-columns: minmax(min-content, 600px);
+  grid-template-rows: minmax(min-content, max-content);
+  grid-template-areas:
+  'name avatar'
+  'about avatar'
+  'bio avatar'
+  '. avatar'
+  'link avatar';
+  gap: 0 270px;
+  margin-top: 66px;
+}
+
+.about-me__avatar {
+  width: 270px;
+  border-radius: 10px;
+  grid-area: avatar;
+}
+
+.about-me__author-name {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  grid-area: name;
+}
+
+.about-me__author-info {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  color: #ffffff;
+  grid-area: about;
+  margin: 18px 0 0 0;
+}
+
+.about-me__author-bio {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: #ffffff;
+  grid-area: bio;
+  margin: 26px 0 0 0;
+}
+
+.about-me__link {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #ffffff;
+  text-decoration: none;
+  grid-area: link;
+}

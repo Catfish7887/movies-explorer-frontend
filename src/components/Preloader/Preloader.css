@@ -1,0 +1,18 @@
+.preloader {
+  padding: 50px 37.5% 80px;
+}
+
+.preloader__button {
+  width: 320px;
+  height: 36px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  color: white;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background-color: #2F2F2F;
+}

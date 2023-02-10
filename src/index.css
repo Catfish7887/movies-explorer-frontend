@@ -19,3 +19,9 @@
 @import url(../src/components/AboutMe/AboutMe.css);
 @import url(../src/components/Portfolio/Portfolio.css);
 @import url(../src/components/Footer/Footer.css);
+@import url(../src/components/Search/Search.css);
+@import url(../src/components/SearchBar/SearchBar.css);
+@import url(../src/components/Movies/Movies.css);
+@import url(../src/components/Cards/Cards.css);
+@import url(../src/components/Card/Card.css);
+@import url(../src/components/Preloader/Preloader.css);

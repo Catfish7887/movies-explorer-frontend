@@ -11,7 +11,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/movies" element={<ProtectedRoute isLoggedIn={true} element={<Movies />} />} />
+        <Route path="/movies" element={<ProtectedRoute isLoggedIn={true} component={<Movies />} />} />
       </Routes>
       <Footer />
     </>

@@ -1,10 +1,15 @@
-import Search from "../Search/Search";
+import Cards from '../Cards/Cards';
+import Preloader from '../Preloader/Preloader';
+import Search from '../Search/Search';
 
 function Movies() {
   return (
-  <section className="movies">
+    <main className="movies">
       <Search />
-  </section>);
-};
+      <Cards />
+      <Preloader />
+    </main>
+  );
+}
 
 export default Movies;

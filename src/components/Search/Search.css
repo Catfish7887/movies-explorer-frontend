@@ -1,4 +1,16 @@
 .search{
   padding: 144px 70px 69px;
+  position: relative;
+}
+
+.search::after{
+  content: '';
+  position: absolute;
+  width: 1140px;
+  height: 100%;
+  top: 0;
+  left: 70px;
   border-bottom: 1px solid #424242;
+  z-index: -1;
+
 }

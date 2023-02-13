@@ -1,6 +1,9 @@
 .cards{
-  padding-top: 80px;
-  padding-bottom: 30px;
+  padding: 80px 70px 30px;
+}
+
+.cards_saved{
+  padding-bottom: 249px;
 }
 
 .cardlist{

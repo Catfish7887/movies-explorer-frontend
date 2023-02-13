@@ -1,21 +1,19 @@
 import Cards from '../Cards/Cards';
 import Footer from '../Footer/Footer';
 import Header from '../Header';
-import Preloader from '../Preloader/Preloader';
 import Search from '../Search/Search';
 
-function Movies() {
+function SavedMovies() {
   return (
     <>
       <Header />
-      <main className="movies">
+      <main className="saved-movies">
         <Search />
-        <Cards isSavedPage={false} />
-        <Preloader />
+        <Cards isSavedPage={true} />
       </main>
       <Footer />
     </>
   );
 }
 
-export default Movies;
+export default SavedMovies;

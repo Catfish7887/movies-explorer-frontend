@@ -1,12 +1,13 @@
 import Card from '../Card/Card';
 
-function Cards() {
+function Cards(props) {
+
   return (
-    <section className="cards">
-      <ul className='cardlist'>
-        <Card />
-        <Card />
-        <Card />
+    <section className= {props.isSavedPage ? "cards cards_saved" : "cards"}>
+      <ul className="cardlist">
+        <Card isSavedPage={props.isSavedPage} />
+        <Card isSavedPage={props.isSavedPage} />
+        <Card isSavedPage={props.isSavedPage} />
       </ul>
     </section>
   );

@@ -1,19 +1,25 @@
-import About from "../About/About";
-import AboutMe from "../AboutMe/AboutMe";
-import LandingHeader from "../LandingHeader/LandingHeader";
-import Tech from "../Tech/Tech";
-import Portfolio from "../Portfolio/Portfolio";
+import About from '../About/About';
+import AboutMe from '../AboutMe/AboutMe';
+import LandingHeader from '../LandingHeader/LandingHeader';
+import Tech from '../Tech/Tech';
+import Portfolio from '../Portfolio/Portfolio';
+import Header from '../Header';
+import Footer from '../Footer/Footer';
 
-function Main(){
-  return(
-    <main>
-      <LandingHeader />
-      <About />
-      <Tech />
-      <AboutMe />
-      <Portfolio />
-    </main>
-  )
-};
+function Main() {
+  return (
+    <>
+      <Header />
+      <main>
+        <LandingHeader />
+        <About />
+        <Tech />
+        <AboutMe />
+        <Portfolio />
+      </main>
+      <Footer />
+    </>
+  );
+}
 
 export default Main;

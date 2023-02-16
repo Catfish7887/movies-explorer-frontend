@@ -17,20 +17,30 @@
 
 .profile__user-info {
   padding: 0;
-  margin: 107px 0 0;
+  margin: 0;
+  width: 100%;
 }
 
 .profile__info-container {
   list-style: none;
   display: flex;
-  gap: 273.3px;
+  width: 100%;
   justify-content: space-between;
   padding: 16px 0 17px;
+}
+.profile__form{
+  padding: 0;
+  margin: 107px 0 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .profile__info-container:first-of-type {
   border-bottom: 1px solid #424242;
 }
+
 .profile__info-element {
   font-family: 'Inter';
   font-style: normal;
@@ -38,15 +48,21 @@
   font-size: 11px;
   line-height: 13px;
   color: white;
+
 }
 
-.profile__buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  margin-top: 220px;
+.profile__info-input{
+  background-color: transparent;
+  border: none;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  color: white;
+  text-align: right;
 }
+
 
 .profile__button {
   background-color: transparent;
@@ -58,13 +74,15 @@
   font-size: 13px;
   line-height: 16px;
   color: white;
-  transition: opacity .5s ease-in-out;
+  transition: font-size .3s ease-in-out;
+  margin-top: 220px;
 }
 
 .profile__button:hover{
-  opacity: 0.8;
+  font-size: 15px;
 }
 
 .profile__button_red-text {
   color: #ee3465;
+  margin-top: 16px;
 }

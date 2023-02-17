@@ -6,6 +6,8 @@ import SavedMovies from './SavedMovies/SavedMovies';
 import Profile from './Profile/Profile';
 import AuthRoute from './AuthRoute/AuthRoute';
 import Register from './Authorization/Register';
+import Login from './Authorization/Login';
+import NotFoundPage from './NotFoundPage/NotFoundPage';
 
 function App() {
   return (
@@ -16,7 +18,8 @@ function App() {
         <Route path="/movies" element={<ProtectedRoute isLoggedIn={true} component={<Movies />} />} />
         <Route path="/saved-movies" element={<ProtectedRoute isLoggedIn={true} component={<SavedMovies />} />} />
         <Route path="/register" element={<AuthRoute isLoggedIn={false} component={<Register />} />} />
-        {/* <Route path="/login" element={<AuthRoute isLoggedIn={false} component={<Login />} />} /> */}
+        <Route path="/login" element={<AuthRoute isLoggedIn={false} component={<Login />} />} />
+        <Route path="/*" element={<NotFoundPage />} />
       </Routes>
     </>
   );

@@ -1,0 +1,46 @@
+.not-found {
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 246px;
+  margin: 0 auto 0;
+}
+
+.not-found__title {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 140px;
+  line-height: 169px;
+  color: #ffffff;
+  margin: 0;
+}
+
+.not-found__span {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #ffffff;
+  margin-top: 5px;
+}
+
+.not-found__link {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  margin-top: 184px;
+  color: #4285f4;
+  text-decoration: none;
+  transition: opacity 0.8s ease;
+}
+
+.not-found__link:hover{
+  opacity: 0.7;
+}
+
+

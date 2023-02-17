@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-function Register() {
+function Login() {
   return (
     <>
       <header className="authorization__header">
@@ -14,16 +14,10 @@ function Register() {
             <path fillRule="evenodd" clipRule="evenodd" d="M15.1538 19C15.1538 21.1242 16.8758 22.8462 19 22.8462C21.1242 22.8462 22.8462 21.1242 22.8462 19H25C25 22.3137 22.3137 25 19 25C15.6863 25 13 22.3137 13 19H15.1538Z" fill="#3DDC84" />
           </svg>
         </Link>
-        <h1 className="authorization__title">Добро пожаловать!</h1>
+        <h1 className="authorization__title">Рады видеть!</h1>
       </header>
       <main className="authorization__main">
         <form className="authorization__form">
-          <label htmlFor="username-input" className="authorization__form-label">
-            Имя
-            <input name="username-input" className="authorization__form-input" type="text" />
-            <span className="authorization__form-error">error</span>
-          </label>
-
           <label htmlFor="email-input" className="authorization__form-label">
             Email
             <input name="email-input" className="authorization__form-input" type="email" />
@@ -36,21 +30,20 @@ function Register() {
             <span className="authorization__form-error">error</span>
           </label>
 
-          <button className="authorization__form-submit" type="submit">
-            Зарегистрироваться
+          <button className="authorization__form-submit authorization__form-submit_page_login" type="submit">
+            Войти
           </button>
         </form>
       </main>
       <footer className="authorization__footer">
         <div className="authorization__footer-container">
-          <span className="authorization__footer-span">Уже зарегистрированы?</span>
-          <Link to="/login" className="authorization__footer-link">
-            Войти
+          <span className="authorization__footer-span">Ещё не зарегистрированы?</span>
+          <Link to="/register" className="authorization__footer-link">
+            Зарегистрироваться
           </Link>
         </div>
       </footer>
     </>
   );
 }
-
-export default Register;
+export default Login;

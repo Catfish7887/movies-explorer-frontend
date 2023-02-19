@@ -1,0 +1,137 @@
+.navbar {
+  display: flex;
+  gap: 746px;
+}
+
+.navbar__signin-button {
+  padding: 8px 20px;
+  background-color: #3ddc84;
+  color: black;
+  border: none;
+  border-radius: 3px;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 133%;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.navbar__signin-button:hover {
+  opacity: 0.7;
+}
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.navbar__link {
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 138%;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.navbar__link_hidden{
+  display: none;
+}
+
+.navbar__link:hover {
+  opacity: 0.7;
+}
+
+.navbar__link_active {
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal;
+  font-size: 14px;
+  font-weight: 400;
+  border-bottom: 1px solid white;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.navbar__buttons {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.navbar__account-button {
+  background-color: #1d1d1d;
+  text-decoration: none;
+  border-radius: 40px;
+  width: 100px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+}
+
+.navbar__account-button:hover {
+  background-color: #3ddc84;
+}
+
+.navbar__account-button_active {
+  cursor: default;
+  background-color: #3ddc84;
+}
+
+.navbar__account-button svg {
+  margin-right: 3px;
+}
+
+.navbar__account-span {
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 138%;
+  color: #ffffff;
+  text-decoration: none;
+  margin-right: 7px;
+}
+
+@media screen and (max-width: 1279px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    gap: 621px;
+  }
+
+  .navbar__links {
+    flex-direction: column;
+    gap: 28px;
+  }
+  .navbar__link {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    width: 340px;
+    text-align: center;
+  }
+
+  .navbar__link_active {
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-style: normal;
+    font-size: 18px;
+    font-weight: 500;
+    border-bottom: 1px solid white;
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  .navbar__link_hidden{
+    display: block;
+  }
+}

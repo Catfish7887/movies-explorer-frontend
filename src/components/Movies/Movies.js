@@ -1,6 +1,6 @@
 import Cards from '../Cards/Cards';
 import Footer from '../Footer/Footer';
-import Header from '../Header';
+import Header from '../Header/Header';
 import Preloader from '../Preloader/Preloader';
 import Search from '../Search/Search';
 

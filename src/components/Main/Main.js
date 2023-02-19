@@ -3,14 +3,14 @@ import AboutMe from '../AboutMe/AboutMe';
 import LandingHeader from '../LandingHeader/LandingHeader';
 import Tech from '../Tech/Tech';
 import Portfolio from '../Portfolio/Portfolio';
-import Header from '../Header';
+import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
 function Main() {
   return (
     <>
-      <Header />
-      <main>
+      <Header page={'landing'}/>
+      <main className='main'>
         <LandingHeader />
         <About />
         <Tech />

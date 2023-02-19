@@ -67,4 +67,10 @@
   color: #ffffff;
   text-decoration: none;
   grid-area: link;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.about-me__link:hover{
+  opacity: 0.7;
 }

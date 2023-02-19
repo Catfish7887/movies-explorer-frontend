@@ -1,4 +1,4 @@
-import Header from '../Header';
+import Header from '../Header/Header';
 
 function Profile() {
   return (
@@ -9,12 +9,16 @@ function Profile() {
         <form className="profile__form">
           <ul className="profile__user-info">
             <li className="profile__info-container">
-              <label htmlFor='name-input' className="profile__info-element">Имя</label>
-              <input name='name-input' className="profile__info-input" value='some text' type='text'/>
+              <label htmlFor="name-input" className="profile__info-element">
+                Имя
+              </label>
+              <input name="name-input" className="profile__info-input" value="some text" type="text" />
             </li>
             <li className="profile__info-container">
-              <label htmlFor='email-input' className="profile__info-element">Email</label>
-              <input name='email-input' className="profile__info-input" value='some text' type='text'/>
+              <label htmlFor="email-input" className="profile__info-element">
+                Email
+              </label>
+              <input name="email-input" className="profile__info-input" value="some text" type="text" />
             </li>
           </ul>
           <button aria-label="Редактировать профиль" className="profile__button" type="submit">

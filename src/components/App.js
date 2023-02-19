@@ -8,6 +8,7 @@ import AuthRoute from './AuthRoute/AuthRoute';
 import Register from './Authorization/Register';
 import Login from './Authorization/Login';
 import NotFoundPage from './NotFoundPage/NotFoundPage';
+import NavPopup from './NavPopup/NavPopup';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/login" element={<AuthRoute isLoggedIn={false} component={<Login />} />} />
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>
+      <NavPopup isOpened={true}/>
     </>
   );
 }

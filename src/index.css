@@ -2,16 +2,9 @@
 @import url(../src/vendor/fonts/Inter/inter.css);
 @import url(../src/blocks/root/root.css);
 
-@import url(../src/blocks/header/header.css);
-@import url(../src/blocks/navbar/navbar.css);
-@import url(../src/blocks/navbar/__link/navbar__link.css);
-@import url(../src/blocks/navbar/__link/_active/navbar__link_active.css);
-@import url(../src/blocks/navbar/__account-button/navbar__account-button.css);
-@import url(../src/blocks/navbar/__account-span/navbar__account-span.css);
-@import url(../src/blocks/navbar/__links/navbar__links.css);
-@import url(../src/blocks/navbar/__buttons/navbar__buttons.css);
-@import url(../src/blocks/navbar/__signin-button/navbar__signin-button.css);
+@import url(../src/components/Header/Header.css);
 
+@import url(../src/components/NavBar/NavBar.css);
 @import url(../src/components/Main/Main.css);
 @import url(../src/components/LandingHeader/LandingHeader.css);
 @import url(../src/components/About/About.css);
@@ -28,3 +21,4 @@
 @import url(../src/components/Profile/Profile.css);
 @import url(../src/components/Authorization/Authorization.css);
 @import url(../src/components/NotFoundPage/NotFoundPage.css);
+@import url(../src/components/NavPopup/NavPopup.css);

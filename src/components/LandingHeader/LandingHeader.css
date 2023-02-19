@@ -1,19 +1,14 @@
 .landing-header {
   background-color: #073042;
-  padding-top: 150px;
-  padding-bottom: 75px;
+  padding: 96px 70px 75px;
 }
 
 .landing-header__content {
   display: grid;
-  /* grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr); */
-  grid-template-columns: minmax(min-content, max-content);
-  grid-template-rows: minmax(min-content, max-content);
   grid-template-areas:
     'heading image'
+    'span image'
     'span image';
-  margin: 0 70px 0 70px;
 }
 
 .landing-header__heading {
@@ -24,12 +19,13 @@
   line-height: 116%;
   color: #ffffff;
   max-width: 640px;
+  margin: 0;
 }
 
 .landing-header__logo {
   grid-area: image;
+  align-self: start;
   justify-self: end;
-  align-self: center;
 }
 
 .landing-header__span {
@@ -42,9 +38,11 @@
   color: #ffffff;
   opacity: 0.5;
   max-width: 310px;
+  margin-top: 36px;
 }
 
 .landing-header__button {
+  grid-area: span;
   padding: 10px 20px;
   background-color: transparent;
   border-radius: 3px;
@@ -55,6 +53,8 @@
   font-size: 12px;
   line-height: 133%;
   color: #ffffff;
+  text-decoration: none;
   border: 1px solid #ffffff;
-  margin: 146px 0 0 70px;
+  margin-top: 146px;
+  width: 93px;
 }

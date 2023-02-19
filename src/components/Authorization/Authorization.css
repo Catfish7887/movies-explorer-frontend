@@ -7,10 +7,6 @@
   align-items: flex-start;
 }
 
-.authorization__logo-link {
-  cursor: pointer;
-}
-
 .authorization__title {
   font-family: 'Inter';
   font-style: normal;

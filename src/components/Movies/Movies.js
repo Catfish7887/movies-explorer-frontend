@@ -4,10 +4,10 @@ import Header from '../Header/Header';
 import Preloader from '../Preloader/Preloader';
 import Search from '../Search/Search';
 
-function Movies() {
+function Movies(props) {
   return (
     <>
-      <Header />
+      <Header openPopup={props.openNavPopup}/>
       <main className="movies">
         <Search />
         <Cards isSavedPage={false} />

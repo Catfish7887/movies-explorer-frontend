@@ -9,20 +9,31 @@ import Register from './Authorization/Register';
 import Login from './Authorization/Login';
 import NotFoundPage from './NotFoundPage/NotFoundPage';
 import NavPopup from './NavPopup/NavPopup';
+import { useState } from 'react';
 
 function App() {
+  const [isNavPopupOpened, setIsNavPopupOpened] = useState(false)
+
+  function openNavPopup() {
+    setIsNavPopupOpened(true)
+  };
+
+  function closeAllPopups() {
+    setIsNavPopupOpened(false)
+  };
+
   return (
     <>
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route path="/" element={<Main openNavPopup={openNavPopup}/>} />
         <Route path="/profile" element={<ProtectedRoute isLoggedIn={true} component={<Profile />} />} />
-        <Route path="/movies" element={<ProtectedRoute isLoggedIn={true} component={<Movies />} />} />
-        <Route path="/saved-movies" element={<ProtectedRoute isLoggedIn={true} component={<SavedMovies />} />} />
+        <Route path="/movies" element={<ProtectedRoute isLoggedIn={true} component={<Movies openNavPopup={openNavPopup} />} />} />
+        <Route path="/saved-movies" element={<ProtectedRoute isLoggedIn={true} component={<SavedMovies openNavPopup={openNavPopup}/>} />} />
         <Route path="/register" element={<AuthRoute isLoggedIn={false} component={<Register />} />} />
         <Route path="/login" element={<AuthRoute isLoggedIn={false} component={<Login />} />} />
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>
-      <NavPopup isOpened={true}/>
+      <NavPopup onClose={closeAllPopups} isOpened={isNavPopupOpened}/>
     </>
   );
 }

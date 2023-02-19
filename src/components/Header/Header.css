@@ -1,4 +1,4 @@
-.header{
+.header {
   display: flex;
   max-width: 1140px;
   margin: 0 auto;
@@ -8,42 +8,47 @@
   padding: 18px 70px 18px;
 }
 
-.header_page_landing{
+.header_page_landing {
   background-color: #073042;
 }
 
-.header__logo-link{
+.header__logo-link {
   cursor: pointer;
   transition: opacity 0.7s ease;
 }
 
-.header__logo-link_active{
+.header__logo-link_active {
   cursor: default;
-
 }
 
-.header__logo-link:hover{
+.header__logo-link:hover {
   opacity: 0.7;
 }
 
-.header__burger-button{
+.header__burger-button {
   background-color: transparent;
   border: none;
   display: none;
   cursor: pointer;
   transition: opacity 0.3s ease;
+  padding: 0;
 }
 
-.header__burger-button:hover{
+.header__burger-button:hover {
   opacity: 0.7;
 }
 
 @media screen and (max-width: 1279px) {
-  .header__navbar-container{
+  .header {
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+
+  .header__navbar-container {
     display: none;
   }
 
-  .header__burger-button{
+  .header__burger-button {
     display: block;
   }
 }

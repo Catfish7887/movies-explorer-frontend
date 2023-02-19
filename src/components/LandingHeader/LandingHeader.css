@@ -58,3 +58,37 @@
   margin-top: 146px;
   width: 93px;
 }
+
+@media screen and (max-width: 1279px) {
+
+  .landing-header{
+    padding: 140px 44px 76px;
+  }
+
+  .landing-header__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .landing-header__logo {
+    align-self: center;
+  }
+
+  .landing-header__heading {
+    font-size: 40px;
+    line-height: 50px;
+    text-align: center;
+    margin-top: 48px;
+  }
+
+  .landing-header__span {
+    text-align: center;
+    width: 260px;
+    margin-top: 22px;
+  }
+
+  .landing-header__button{
+    margin-top: 92px;
+  }
+}

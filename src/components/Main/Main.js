@@ -6,10 +6,10 @@ import Portfolio from '../Portfolio/Portfolio';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
-function Main() {
+function Main(props) {
   return (
     <>
-      <Header page={'landing'}/>
+      <Header openPopup={props.openNavPopup} page={'landing'}/>
       <main className='main'>
         <LandingHeader />
         <About />

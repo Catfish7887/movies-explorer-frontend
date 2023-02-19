@@ -11,7 +11,13 @@
   letter-spacing: -0.04em;
   color: #ffffff;
   padding-bottom: 22px;
-  width: 1140px;
+  width: 100%;
   margin: 0;
   border-bottom: 1px solid #DADADA;
+}
+
+@media screen and (max-width: 1279px) {
+  .section__title{
+    /* width: 668px; */
+  }
 }

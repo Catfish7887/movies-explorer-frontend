@@ -22,7 +22,6 @@
     'text1 text2';
   gap: 26px 40px;
   max-width: 1140px;
-  border-top: 1px solid #dadada;
 }
 
 .about__span {
@@ -94,4 +93,27 @@
 
 .about__strip-text_back{
   grid-area: back;
+}
+
+@media screen and (max-width: 1279px) {
+  .about{
+    padding: 90px 50px 90px;
+  }
+
+  .about__text-container{
+    gap: 22px 30px;
+  }
+
+  .about__text{
+    max-width: 319px;
+  }
+
+  .about__span{
+    max-width: 319px;
+  }
+
+  .about__strip{
+    margin-top: 93px;
+  }
+
 }

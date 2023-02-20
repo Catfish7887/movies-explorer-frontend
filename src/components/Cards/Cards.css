@@ -1,17 +1,32 @@
-.cards{
+.cards {
   padding: 80px 70px 30px;
 }
 
-.cards_saved{
+.cards_saved {
   padding-bottom: 249px;
 }
 
-.cardlist{
+.cardlist {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 24px;
   padding: 0;
   margin: 0;
+  width: 100%;
+}
 
+@media screen and (max-width: 1279px) {
+  .cardlist{
+    display: grid;
+    grid-template-rows: minmax(min-content, max-content);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 36px 30px;
+  }
+
+  .cards{
+    margin: 0 auto 0;
+    padding: 80px 30px 30px;
+    max-width: 708px;
+  }
 }

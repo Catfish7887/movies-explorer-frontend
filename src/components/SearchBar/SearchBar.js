@@ -10,10 +10,12 @@ function SearchBar() {
         />
       </svg>
       <form className="searchform">
-        <input type="text" name="film-input" placeholder="Фильм" className="searchform__input" />
-        <button type="submit" className="searchform__submit-button">
-          Найти
-        </button>
+        <div className="searchform__input-container">
+          <input type="text" name="film-input" placeholder="Фильм" className="searchform__input" />
+          <button type="submit" className="searchform__submit-button">
+            Найти
+          </button>
+        </div>
         <div className="checkbox-container">
           <label className="searchform__label">
             <input className="searchform__checkbox" type="checkbox" name="film-checkbox" />

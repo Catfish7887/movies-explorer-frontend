@@ -14,3 +14,13 @@
   z-index: -1;
 
 }
+
+@media screen and (max-width: 1279px) {
+  .search{
+    padding: 80px 30px 109px;
+  }
+  .search::after{
+    width: 92.19%;
+    left: 30px;
+  }
+}

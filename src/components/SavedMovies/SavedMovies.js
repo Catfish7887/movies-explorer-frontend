@@ -6,10 +6,10 @@ import Search from '../Search/Search';
 function SavedMovies(props) {
   return (
     <>
-      <Header openPopup={props.openNavPopup}/>
+      <Header openPopup={props.openPopup}/>
       <main className="saved-movies">
         <Search />
-        <Cards isSavedPage={true} />
+        <Cards />
       </main>
       <Footer />
     </>

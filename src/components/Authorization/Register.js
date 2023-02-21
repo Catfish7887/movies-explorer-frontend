@@ -1,6 +1,19 @@
+import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 function Register() {
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+  } = useForm({
+    mode: 'onChange',
+  });
+
+  function reg(data) {
+    console.log(data, isValid, errors);
+  }
+
   return (
     <>
       <header className="authorization__header">
@@ -17,26 +30,52 @@ function Register() {
         <h1 className="authorization__title">Добро пожаловать!</h1>
       </header>
       <main className="authorization__main">
-        <form className="authorization__form">
+        <form onSubmit={handleSubmit(reg)} className="authorization__form">
           <label htmlFor="username-input" className="authorization__form-label">
             Имя
-            <input name="username-input" className="authorization__form-input" type="text" />
-            <span className="authorization__form-error">error</span>
+            <input
+              type={'text'}
+              className={errors.name ? 'authorization__form-input authorization__form-input_invalid' : 'authorization__form-input'}
+              {...register('name', {
+                required: 'Поле должно быть заполнено',
+                minLength: {
+                  value: 2,
+                  message: 'Должно быть минимум 2 символа',
+                },
+              })}
+            />
+            <span className={errors.name ? 'authorization__form-error' : 'authorization__form-error_hidden'}>{errors.name?.message || 'что-то не так'}</span>
           </label>
 
           <label htmlFor="email-input" className="authorization__form-label">
             Email
-            <input name="email-input" className="authorization__form-input" type="email" />
-            <span className="authorization__form-error">error</span>
+            <input
+              type={'email'}
+              className={errors.email ? 'authorization__form-input authorization__form-input_invalid' : 'authorization__form-input'}
+              {...register('email', {
+                required: 'Поле должно быть заполнено',
+                pattern: {
+                  value: /[a-zA-Z0-9\.-\/-_~:\/?#\[\]!$&'()*+,;=]+@[a-zA-Z0-9\.-\/-_~:\/?#\[\]!$&'()*+,;=]+\.[a-zA-Z0-9\.-\/-_~:\/?#\[\]!$&'()*+,;=]+/i, //eslint-disable-line
+                  message: 'Email должен быть вида email@example.com',
+                },
+              })}
+            />
+            <span className={errors.email ? 'authorization__form-error' : 'authorization__form-error_hidden'}>{errors.email?.message || 'что-то не так'}</span>
           </label>
 
           <label htmlFor="password-input" className="authorization__form-label">
             Пароль
-            <input name="password-input" className="authorization__form-input" type="text" />
-            <span className="authorization__form-error">error</span>
+            <input
+              type={'password'}
+              className={errors.password ? 'authorization__form-input authorization__form-input_invalid' : 'authorization__form-input'}
+              {...register('password', {
+                required: 'Поле должно быть заполнено',
+              })}
+            />
+            <span className={errors.password ? 'authorization__form-error' : 'authorization__form-error_hidden'}>{errors.password?.message || 'что-то не так'}</span>
           </label>
 
-          <button className="authorization__form-submit" type="submit">
+          <button disabled={!isValid} className={isValid && Object.keys(errors).length === 0 ? 'authorization__form-submit authorization__form-submit_enabled' : 'authorization__form-submit authorization__form-submit_disabled'} type="submit">
             Зарегистрироваться
           </button>
         </form>

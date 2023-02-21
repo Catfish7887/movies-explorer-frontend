@@ -3,7 +3,7 @@ import NavBar from '../NavBar/NavBar';
 
 function Header(props) {
   return (
-    <header className={props.page === 'landing' ? 'header header_page_landing' : 'header'}>
+    <header className={window.location.pathname === '/' ? 'header header_page_landing' : 'header'}>
       <nav>
         <NavLink to="/" className={({ isActive }) => (isActive ? 'header__logo-link_active' : 'header__logo-link')}>
           <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -22,9 +22,9 @@ function Header(props) {
 
       <button onClick={props.openPopup} type='button' aria-label='Открыть попап с навигацией' className="header__burger-button">
         <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M36 14L8 14V11L36 11V14Z" fill="white" />
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M36 24L8 24V21L36 21V24Z" fill="white" />
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M36 34L8 34V31L36 31V34Z" fill="white" />
+          <path fillRule="evenodd" clipRule="evenodd" d="M36 14L8 14V11L36 11V14Z" fill="white" />
+          <path fillRule="evenodd" clipRule="evenodd" d="M36 24L8 24V21L36 21V24Z" fill="white" />
+          <path fillRule="evenodd" clipRule="evenodd" d="M36 34L8 34V31L36 31V34Z" fill="white" />
         </svg>
       </button>
     </header>

@@ -1,9 +1,9 @@
 import Header from '../Header/Header';
 
-function Profile() {
+function Profile(props) {
   return (
     <>
-      <Header />
+      <Header openPopup={props.openPopup}/>
       <main className="profile">
         <h1 className="profile__title">Привет, пользователь!</h1>
         <form className="profile__form">

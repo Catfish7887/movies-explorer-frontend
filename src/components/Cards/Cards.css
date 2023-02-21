@@ -29,4 +29,8 @@
     padding: 80px 30px 30px;
     max-width: 708px;
   }
+
+  .cards_saved {
+    padding-bottom: 249px;
+  }
 }

@@ -3,7 +3,7 @@
   padding: 100px 70px;
   display: flex;
   flex-direction: column;
-  align-items: center
+  align-items: center;
 }
 
 .tech__heading {
@@ -33,7 +33,8 @@
 .tech__container {
   display: flex;
   gap: 10px;
-  margin-top: 100px;
+  margin: 100px 0 0;
+  padding: 0;
 }
 
 .tech__item {
@@ -44,11 +45,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.tech__item-text {
-  font-family: 'Inter';
-  font-style: normal;
+  list-style: none;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
@@ -57,19 +54,44 @@
 }
 
 @media screen and (max-width: 1279px) {
-  .tech{
+  .tech {
     padding: 90px 50px;
   }
 
-  .tech__heading{
+  .tech__heading {
     margin-top: 80px;
   }
 
-  .tech__text{
+  .tech__text {
     margin-top: 22px;
   }
 
-  .tech__container{
+  .tech__container {
     margin-top: 83px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .tech {
+    padding: 70px 18px;
+    background-color: transparent;
+  }
+
+  .tech__heading {
+    font-size: 30px;
+    line-height: 36px;
+    margin-top: 60px;
+  }
+
+  .tech__text {
+    font-size: 11px;
+    line-height: 16px;
+    margin-top: 24px;
+  }
+
+  .tech__container{
+    flex-wrap: wrap;
+    margin-top: 50px;
+    max-width: 178px;
   }
 }

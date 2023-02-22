@@ -13,18 +13,21 @@
 }
 
 .about__text-container {
-  padding-top: 70px;
-  display: grid;
-  grid-template-columns: minmax(min-content, max-content);
-  grid-template-rows: minmax(min-content, max-content);
-  grid-template-areas:
-    'span span'
-    'text1 text2';
-  gap: 26px 40px;
-  max-width: 1140px;
+  padding: 0;
+  margin: 70px 0 0;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
 }
 
-.about__span {
+.about__text-li {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.about__heading {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
@@ -33,7 +36,7 @@
   letter-spacing: -0.04em;
   color: #ffffff;
   width: 550px;
-  grid-area: span;
+  margin: 0;
 }
 
 .about__text {
@@ -51,10 +54,9 @@
   margin-top: 110px;
   display: grid;
   grid-template-rows: minmax(min-content, max-content);
-  grid-template-columns: repeat(5, 1fr);
   grid-template-areas:
-  "small big big big big"
-  "back . front front .";
+    'small big big big big'
+    'back . front front .';
   gap: 14px 0;
 }
 
@@ -70,8 +72,8 @@
   grid-area: small;
 }
 
-.about__strip-element_big{
-  color: #FFFFFF;
+.about__strip-element_big {
+  color: #ffffff;
   background-color: #303030;
   grid-area: big;
 }
@@ -87,33 +89,73 @@
   justify-self: center;
 }
 
-.about__strip-text_front{
+.about__strip-text_front {
   grid-area: front;
 }
 
-.about__strip-text_back{
+.about__strip-text_back {
   grid-area: back;
 }
 
 @media screen and (max-width: 1279px) {
-  .about{
+  .about {
     padding: 90px 50px 90px;
   }
 
-  .about__text-container{
-    gap: 22px 30px;
+  .about__text-li {
+    gap: 22px;
   }
 
-  .about__text{
+  .about__text {
     max-width: 319px;
   }
 
-  .about__span{
+  .about__heading {
     max-width: 319px;
   }
 
-  .about__strip{
+  .about__strip {
     margin-top: 93px;
   }
+}
 
+@media screen and (max-width: 767px) {
+  .about {
+    padding: 70px 18px;
+  }
+
+  .about__text-container {
+    flex-direction: column-reverse;
+    gap: 56px;
+  }
+
+  .about__text-li {
+    gap: 16px;
+  }
+
+  .about__heading {
+    max-width: 284px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .about__text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about__strip {
+    margin-top: 60px;
+    gap: 10px 0;
+  }
+
+  .about__strip-element {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .about__strip-text {
+    font-size: 11px;
+    line-height: 13px;
+  }
 }

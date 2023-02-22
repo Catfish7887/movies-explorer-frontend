@@ -1,7 +1,9 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import NavBar from '../NavBar/NavBar';
 
 function Header(props) {
+  const isLoggedIn = false;
+
   return (
     <header className={window.location.pathname === '/' ? 'header header_page_landing' : 'header'}>
       <nav>
@@ -16,17 +18,31 @@ function Header(props) {
           </svg>
         </NavLink>
       </nav>
-      <div className='header__navbar-container'>
-        <NavBar />
-      </div>
-
-      <button onClick={props.openPopup} type='button' aria-label='Открыть попап с навигацией' className="header__burger-button">
-        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path fillRule="evenodd" clipRule="evenodd" d="M36 14L8 14V11L36 11V14Z" fill="white" />
-          <path fillRule="evenodd" clipRule="evenodd" d="M36 24L8 24V21L36 21V24Z" fill="white" />
-          <path fillRule="evenodd" clipRule="evenodd" d="M36 34L8 34V31L36 31V34Z" fill="white" />
-        </svg>
-      </button>
+      {isLoggedIn ? (
+        <>
+          <div className="header__navbar-container">
+            <NavBar />
+          </div>
+          <button onClick={props.openPopup} type="button" aria-label="Открыть попап с навигацией" className="header__burger-button">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fillRule="evenodd" clipRule="evenodd" d="M36 14L8 14V11L36 11V14Z" fill="white" />
+              <path fillRule="evenodd" clipRule="evenodd" d="M36 24L8 24V21L36 21V24Z" fill="white" />
+              <path fillRule="evenodd" clipRule="evenodd" d="M36 34L8 34V31L36 31V34Z" fill="white" />
+            </svg>
+          </button>
+        </>
+      ) : (
+        <>
+          <nav className="header__buttons">
+            <Link to="/register" className="header__link">
+              Регистрация
+            </Link>
+            <Link to="/login" className="header__signin-button">
+              Войти
+            </Link>
+          </nav>
+        </>
+      )}
     </header>
   );
 }

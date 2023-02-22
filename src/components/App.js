@@ -10,8 +10,6 @@ import Login from './Authorization/Login';
 import NotFoundPage from './NotFoundPage/NotFoundPage';
 import NavPopup from './NavPopup/NavPopup';
 import { useState } from 'react';
-import Header from './Header/Header';
-import Footer from './Footer/Footer';
 
 function App() {
   const [isNavPopupOpened, setIsNavPopupOpened] = useState(false);

@@ -3,8 +3,6 @@
 }
 
 .section__title {
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: 400;
   font-size: 22px;
   line-height: 27px;
@@ -16,8 +14,8 @@
   border-bottom: 1px solid #DADADA;
 }
 
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 767px) {
   .section__title{
-    /* width: 668px; */
+    padding-bottom: 28px;
   }
 }

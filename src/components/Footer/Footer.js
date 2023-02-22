@@ -1,7 +1,7 @@
 function Footer() {
   return(
     <footer className="footer">
-      <span className="footer__title">Учебный проект Яндекс.Практикум х BeatFilm.</span>
+      <h2 className="footer__title">Учебный проект Яндекс.Практикум х BeatFilm.</h2>
       <div className="footer__container">
         <nav className="footer__links">
           <a href="https://practicum.yandex.ru/" className="footer__link">Яндекс.Практикум</a>

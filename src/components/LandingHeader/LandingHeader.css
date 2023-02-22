@@ -30,8 +30,6 @@
 
 .landing-header__span {
   grid-area: span;
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
@@ -60,8 +58,7 @@
 }
 
 @media screen and (max-width: 1279px) {
-
-  .landing-header{
+  .landing-header {
     padding: 140px 44px 76px;
   }
 
@@ -88,7 +85,33 @@
     margin-top: 22px;
   }
 
-  .landing-header__button{
+  .landing-header__button {
     margin-top: 92px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .landing-header {
+    padding: 70px 55px 80px;
+  }
+
+  .landing-header__logo {
+    width: 100%;
+  }
+
+  .landing-header__heading {
+    font-size: 30px;
+    line-height: 38px;
+    margin-top: 44px;
+  }
+
+  .landing-header__span {
+    font-size: 13px;
+    line-height: 16px;
+    margin-top: 24px;
+  }
+
+  .landing-header__button{
+    margin-top: 80px;
   }
 }

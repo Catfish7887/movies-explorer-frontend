@@ -8,8 +8,49 @@
   padding: 18px 70px 18px;
 }
 
+.header__buttons {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
 .header_page_landing {
   background-color: #073042;
+}
+
+.header__link {
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  font-size: 12px;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.header__link:hover {
+  opacity: 0.7;
+}
+
+.header__signin-button {
+  padding: 8px 20px;
+  background-color: #3ddc84;
+  color: black;
+  border: none;
+  border-radius: 3px;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.header__signin-button:hover {
+  opacity: 0.7;
 }
 
 .header__logo-link {
@@ -50,5 +91,25 @@
 
   .header__burger-button {
     display: block;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .header {
+    padding: 18px 14px;
+  }
+
+  .header__buttons {
+    gap: 14px;
+  }
+
+  .header__link {
+    font-size: 10px;
+    line-height: 16px;
+  }
+
+  .header__signin-button {
+    font-size: 10px;
+    line-height: 16px;
   }
 }

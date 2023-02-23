@@ -1,12 +1,11 @@
 .header {
   display: flex;
-  max-width: 1140px;
-  margin: 0 auto;
   justify-content: space-between;
-  z-index: 1;
   align-items: center;
   padding: 18px 70px 18px;
 }
+
+.header_page_profile{}
 
 .header__buttons {
   display: flex;
@@ -20,7 +19,6 @@
 
 .header__link {
   font-family: 'Inter', 'Arial', sans-serif;
-  font-style: normal;
   font-weight: 500;
   line-height: 16px;
   font-size: 12px;

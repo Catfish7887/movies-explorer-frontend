@@ -53,7 +53,7 @@
   outline: none;
 }
 
-.authorization__form-input_invalid{
+.authorization__form-input_invalid {
   color: #ee3465;
 }
 
@@ -90,7 +90,6 @@
 .authorization__form-submit_enabled:hover {
   background-color: #3ddc84;
 }
-
 
 .authorization__form-submit_disabled {
   cursor: default;
@@ -136,5 +135,50 @@
 
   .authorization__form-submit_page_login {
     margin-top: 179px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .authorization__header {
+    padding-top: 56px;
+    align-items: center;
+  }
+
+  .authorization__title {
+    margin: 50px 0 80px;
+  }
+
+  .authorization__form-submit{
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 157px;
+    padding: 15px 67px;
+  }
+
+  .authorization__form-submit_page_login {
+    padding: 15px 112px;
+    margin-top: 267px;
+  }
+
+  .authorization__form {
+    align-items: center;
+  }
+
+  .authorization__footer{
+    padding-top: 14px;
+  }
+
+  .authorization__footer-span {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .authorization__footer-link {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .authorization__form-input {
+    width: 260px;
   }
 }

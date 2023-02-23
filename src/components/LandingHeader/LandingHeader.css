@@ -1,6 +1,6 @@
 .landing-header {
   background-color: #073042;
-  padding: 96px 70px 75px;
+  padding: 75px 70px 75px;
 }
 
 .landing-header__content {
@@ -96,7 +96,8 @@
   }
 
   .landing-header__logo {
-    width: 100%;
+    width: 210px;
+    height: 206px;
   }
 
   .landing-header__heading {

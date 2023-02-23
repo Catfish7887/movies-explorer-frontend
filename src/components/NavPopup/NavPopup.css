@@ -44,3 +44,15 @@
 .popup__close-btn:hover {
   opacity: 0.7;
 }
+
+@media screen and (max-width: 767px) {
+  .popup__container {
+    padding: 144px 10px 46px;
+    width: 100%;
+  }
+
+  .popup__close-btn{
+    top: 13.44px;
+    right: 13.44px;
+  }
+}

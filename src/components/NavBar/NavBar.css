@@ -21,7 +21,7 @@
   transition: opacity 0.3s ease;
 }
 
-.navbar__link_hidden{
+.navbar__link_hidden {
   display: none;
 }
 
@@ -36,6 +36,7 @@
   font-weight: 400;
   border-bottom: 1px solid white;
   text-decoration: none;
+  padding-bottom: 4px;
   color: #ffffff;
 }
 
@@ -50,6 +51,7 @@
   justify-content: flex-end;
   box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.08);
   cursor: pointer;
+  transition: all 0.2s linear;
 }
 
 .navbar__account-button:hover {
@@ -59,6 +61,8 @@
 .navbar__account-button_active {
   cursor: default;
   background-color: #3ddc84;
+  /* Добавил отступ, чтобы компенсировать отсутствие полосы прокрутки */
+  margin-right: 17px;
 }
 
 .navbar__account-button svg {
@@ -85,7 +89,7 @@
 
   .navbar__links {
     flex-direction: column;
-    gap: 28px;
+    gap: 24px;
   }
   .navbar__link {
     font-weight: 500;
@@ -93,6 +97,7 @@
     line-height: 22px;
     width: 340px;
     text-align: center;
+    padding-bottom: 4px;
   }
 
   .navbar__link_active {
@@ -100,12 +105,33 @@
     font-style: normal;
     font-size: 18px;
     font-weight: 500;
+    padding-bottom: 4px;
     border-bottom: 1px solid white;
     text-decoration: none;
     color: #ffffff;
   }
 
-  .navbar__link_hidden{
+  .navbar__account-button_active{
+    margin: 0;
+  }
+
+  .navbar__link_hidden {
     display: block;
   }
+}
+
+@media screen and (max-width: 767px) {
+  .navbar__links{
+    gap: 21px;
+  }
+
+  .navbar__link {
+    width: 300px;
+    padding-bottom: 7px;
+  }
+
+  .navbar__link_active {
+    padding-bottom: 7px;
+  }
+
 }

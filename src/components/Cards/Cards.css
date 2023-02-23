@@ -1,5 +1,5 @@
 .cards {
-  padding: 80px 70px 30px;
+  padding: 80px 51px 30px 70px;
 }
 
 .cards_saved {
@@ -17,14 +17,14 @@
 }
 
 @media screen and (max-width: 1279px) {
-  .cardlist{
+  .cardlist {
     display: grid;
     grid-template-rows: minmax(min-content, max-content);
     grid-template-columns: repeat(2, 1fr);
     gap: 36px 30px;
   }
 
-  .cards{
+  .cards {
     margin: 0 auto 0;
     padding: 80px 30px 30px;
     max-width: 708px;
@@ -32,5 +32,18 @@
 
   .cards_saved {
     padding-bottom: 249px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .cards {
+    padding: 45px 10px 30px;
+  }
+
+  .cardlist {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
   }
 }

@@ -1,9 +1,8 @@
 @import url(../src/vendor/normalize.css);
 @import url(../src/vendor/fonts/Inter/inter.css);
-@import url(../src/blocks/root/root.css);
 
+@import url(../src/components/App/App.css);
 @import url(../src/components/Header/Header.css);
-
 @import url(../src/components/NavBar/NavBar.css);
 @import url(../src/components/Main/Main.css);
 @import url(../src/components/LandingHeader/LandingHeader.css);
@@ -18,6 +17,7 @@
 @import url(../src/components/Cards/Cards.css);
 @import url(../src/components/Card/Card.css);
 @import url(../src/components/Preloader/Preloader.css);
+@import url(../src/components/SavedMovies/SavedMovies.css);
 @import url(../src/components/Profile/Profile.css);
 @import url(../src/components/Authorization/Authorization.css);
 @import url(../src/components/NotFoundPage/NotFoundPage.css);

@@ -16,7 +16,7 @@ function SearchBar() {
             Найти
           </button>
         </div>
-        <div className="checkbox-container">
+        <div className="searchform__checkbox-container">
           <label className="searchform__label">
             <input className="searchform__checkbox" type="checkbox" name="film-checkbox" />
             <span className="searchform__checkbox-toggle"></span>

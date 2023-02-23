@@ -109,3 +109,15 @@
 .preloader__button:hover{
   opacity: 0.8;
 }
+
+@media screen and (max-width: 767px) {
+  .preloader{
+    padding: 20px 40px 66px;
+    width: auto;
+  }
+
+  .preloader__button{
+    width: 240px;
+    height: 36px;
+  }
+}

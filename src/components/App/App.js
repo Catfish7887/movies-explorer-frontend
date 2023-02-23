@@ -1,14 +1,14 @@
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import Main from './Main/Main';
-import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
-import Movies from './Movies/Movies';
-import SavedMovies from './SavedMovies/SavedMovies';
-import Profile from './Profile/Profile';
-import AuthRoute from './AuthRoute/AuthRoute';
-import Register from './Authorization/Register';
-import Login from './Authorization/Login';
-import NotFoundPage from './NotFoundPage/NotFoundPage';
-import NavPopup from './NavPopup/NavPopup';
+import Main from '../Main/Main';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import Movies from '../Movies/Movies';
+import SavedMovies from '../SavedMovies/SavedMovies';
+import Profile from '../Profile/Profile';
+import AuthRoute from '../AuthRoute/AuthRoute';
+import Register from '../Authorization/Register';
+import Login from '../Authorization/Login';
+import NotFoundPage from '../NotFoundPage/NotFoundPage';
+import NavPopup from '../NavPopup/NavPopup';
 import { useState } from 'react';
 
 function App() {

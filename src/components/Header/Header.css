@@ -2,10 +2,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 70px 18px;
+  padding: 18px 120px 18px;
 }
 
-.header_page_profile{}
+.header__navbar-container{
+  flex-grow: 1;
+  margin-left: 44px;
+}
 
 .header__buttons {
   display: flex;
@@ -75,6 +78,12 @@
 
 .header__burger-button:hover {
   opacity: 0.7;
+}
+
+@media screen and (max-width: 1439px) {
+  .header{
+    padding: 18px 70px;
+  }
 }
 
 @media screen and (max-width: 1279px) {

@@ -1,6 +1,6 @@
 .landing-header {
   background-color: #073042;
-  padding: 75px 70px 75px;
+  padding: 75px 120px 75px;
 }
 
 .landing-header__content {
@@ -25,7 +25,7 @@
 .landing-header__logo {
   grid-area: image;
   align-self: start;
-  justify-self: end;
+  justify-self: center;
 }
 
 .landing-header__span {
@@ -55,6 +55,14 @@
   border: 1px solid #ffffff;
   margin-top: 146px;
   width: 93px;
+}
+
+@media screen and (max-width: 1439px) {
+ .landing-header{
+  padding: 75px 70px;
+ }
+
+ .landing-header__logo{justify-self: end;}
 }
 
 @media screen and (max-width: 1279px) {

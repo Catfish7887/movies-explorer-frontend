@@ -1,6 +1,6 @@
 .navbar {
   display: flex;
-  gap: 746px;
+  justify-content: space-between;
 }
 
 .navbar__links {

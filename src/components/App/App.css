@@ -1,6 +1,6 @@
 .root {
   background-color: #202020;
-  max-width: 1280px;
+
   margin: 0 auto 0;
   position: relative;
   font-family: 'Inter', 'Arial', sans-serif;
@@ -9,4 +9,12 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
+
+.app{
+  /* max-width: 1280px; */
+  /* width: 100%; */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }

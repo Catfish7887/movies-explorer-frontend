@@ -1,5 +1,9 @@
 .cards {
-  padding: 80px 51px 30px 70px;
+  /* padding: 80px 51px 30px 70px; */
+  padding-top: 90px;
+  border-top: 1px solid #424242;
+  max-width: 1440px;
+  justify-content: center;
 }
 
 .cards_saved {

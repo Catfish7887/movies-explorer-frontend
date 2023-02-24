@@ -1,5 +1,5 @@
 .about {
-  padding: 110px 70px;
+  padding: 110px 120px;
 }
 
 .about__heading {
@@ -97,9 +97,15 @@
   grid-area: back;
 }
 
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 1439px) {
   .about {
     padding: 90px 50px 90px;
+  }
+}
+
+@media screen and (max-width: 1279px) {
+  .about {
+    padding: 110px 70px;
   }
 
   .about__text-li {

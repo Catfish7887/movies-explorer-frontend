@@ -1,6 +1,6 @@
 .tech {
   background-color: #272727;
-  padding: 100px 70px;
+  padding: 100px 120px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,6 +53,12 @@
   color: #ffffff;
 }
 
+@media screen and (max-width: 1439px) {
+  .tech {
+    padding: 100px 70px;
+  }
+}
+
 @media screen and (max-width: 1279px) {
   .tech {
     padding: 90px 50px;
@@ -89,7 +95,7 @@
     margin-top: 24px;
   }
 
-  .tech__container{
+  .tech__container {
     flex-wrap: wrap;
     margin-top: 50px;
     max-width: 178px;

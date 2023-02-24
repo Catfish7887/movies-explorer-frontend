@@ -1,27 +1,12 @@
 .search{
-  padding: 70px 70px 69px;
-  position: relative;
+  padding: 70px 0 69px;
+  width: 100%;
 }
 
-.search::after{
-  content: '';
-  position: absolute;
-  width: 1140px;
-  height: 100%;
-  top: 0;
-  left: 70px;
-  border-bottom: 1px solid #424242;
-  z-index: -1;
-
-}
 
 @media screen and (max-width: 1279px) {
   .search{
     padding: 80px 30px 109px;
-  }
-  .search::after{
-    width: 92.19%;
-    left: 30px;
   }
 }
 

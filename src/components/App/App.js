@@ -37,8 +37,8 @@ function App() {
         <Route path='/movies' element={<Movies openPopup={openNavPopup} />}/>
         <Route path='/profile' element={<Profile openPopup={openNavPopup} />}/>
         <Route path='/saved-movies' element={<SavedMovies openPopup={openNavPopup} />}/>
-        <Route path='/register' element={<Register />} />
-        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Register />} />
+        <Route path='/signin' element={<Login />} />
 
         {/* <Route path="/profile" element={<ProtectedRoute isLoggedIn={true} component={<Profile openPopup={openNavPopup} />} />} />
         <Route path="/movies" element={<ProtectedRoute isLoggedIn={true} component={<Movies openPopup={openNavPopup} />} />} />

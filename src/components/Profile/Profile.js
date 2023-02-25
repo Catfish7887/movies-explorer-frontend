@@ -18,7 +18,7 @@ function Profile(props) {
 
   return (
     <>
-      <Header openPopup={props.openPopup} />
+      <Header isLoggedIn={true} openPopup={props.openPopup} />
       <main className="profile">
         <h1 className="profile__title">Привет, пользователь!</h1>
         <form onSubmit={showFormError} className="profile__form">

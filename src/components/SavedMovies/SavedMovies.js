@@ -6,7 +6,7 @@ import Search from '../Search/Search';
 function SavedMovies(props) {
   return (
     <>
-      <Header openPopup={props.openPopup}/>
+      <Header isLoggedIn={true} openPopup={props.openPopup}/>
       <main className="saved-movies">
         <Search />
         <Cards />

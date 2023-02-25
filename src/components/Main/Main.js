@@ -9,7 +9,7 @@ import Footer from '../Footer/Footer';
 function Main(props) {
   return (
     <>
-      <Header openPopup={props.openPopup} page={'landing'}/>
+      <Header isLoggedIn={false} openPopup={props.openPopup} page={'landing'}/>
       <main className='main'>
         <LandingHeader />
         <About />

@@ -2,7 +2,7 @@ import { Link, NavLink } from 'react-router-dom';
 import NavBar from '../NavBar/NavBar';
 
 function Header(props) {
-  const isLoggedIn = true;
+  const { isLoggedIn } = props;
 
   return (
     <header className={window.location.pathname === '/' ? 'header header_page_landing' : 'header'}>

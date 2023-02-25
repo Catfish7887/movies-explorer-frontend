@@ -7,7 +7,7 @@ import Search from '../Search/Search';
 function Movies(props) {
   return (
     <>
-      <Header openPopup={props.openPopup}/>
+      <Header isLoggedIn={true} openPopup={props.openPopup}/>
       <main className="movies">
         <Search />
         <Cards isSavedPage={false} />

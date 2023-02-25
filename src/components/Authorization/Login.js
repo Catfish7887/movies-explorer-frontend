@@ -67,7 +67,7 @@ function Login() {
       <footer className="authorization__footer">
         <div className="authorization__footer-container">
           <span className="authorization__footer-span">Ещё не зарегистрированы?</span>
-          <Link to="/register" className="authorization__footer-link">
+          <Link to="/signup" className="authorization__footer-link">
             Регистрация
           </Link>
         </div>

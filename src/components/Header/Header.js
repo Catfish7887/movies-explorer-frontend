@@ -34,10 +34,10 @@ function Header(props) {
       ) : (
         <>
           <nav className="header__buttons">
-            <Link to="/register" className="header__link">
+            <Link to="/signup" className="header__link">
               Регистрация
             </Link>
-            <Link to="/login" className="header__signin-button">
+            <Link to="/signin" className="header__signin-button">
               Войти
             </Link>
           </nav>

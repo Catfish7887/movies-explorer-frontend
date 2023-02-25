@@ -83,7 +83,7 @@ function Register() {
       <footer className="authorization__footer">
         <div className="authorization__footer-container">
           <span className="authorization__footer-span">Уже зарегистрированы?</span>
-          <Link to="/login" className="authorization__footer-link">
+          <Link to="/signin" className="authorization__footer-link">
             Войти
           </Link>
         </div>

@@ -1,4 +1,10 @@
-function SearchBar() {
+function SearchBar(props) {
+
+  function findFilms(e){
+    e.preventDefault()
+    props.onSubmit()
+  };
+
   return (
     <div className="searchbar">
       <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -9,7 +15,7 @@ function SearchBar() {
           fill="#959595"
         />
       </svg>
-      <form className="searchform">
+      <form onSubmit={findFilms} className="searchform">
         <div className="searchform__input-container">
           <input type="text" name="film-input" placeholder="Фильм" className="searchform__input" />
           <button type="submit" className="searchform__submit-button">

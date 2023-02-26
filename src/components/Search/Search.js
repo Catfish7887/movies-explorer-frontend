@@ -1,9 +1,9 @@
 import SearchBar from "../SearchBar/SearchBar";
 
-function Search() {
+function Search(props) {
   return (
     <section className="search">
-      <SearchBar />
+      <SearchBar onSubmit={props.getFilms}/>
     </section>
   );
 };

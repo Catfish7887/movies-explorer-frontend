@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import CurrentUserContext from '../../contexts/currentUserContext';
 import Header from '../Header/Header';
 
 function Profile(props) {
   const [isFormActive, setIsFormActive] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
+  const currentUser = useContext(CurrentUserContext)
 
   function showFormError(e){
     e.preventDefault();
@@ -13,6 +16,7 @@ function Profile(props) {
 
   function activateForm() {
     setIsFormActive(true);
+    console.log(currentUser)
     return;
   };
 

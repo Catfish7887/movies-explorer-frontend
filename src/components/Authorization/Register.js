@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-
-function Register() {
+import mainApi from '../../utils/Api/MainApi';
+function Register(props) {
   const {
     register,
     formState: { errors, isValid },
@@ -10,8 +10,13 @@ function Register() {
     mode: 'onChange',
   });
 
-  function reg(data) {
-    console.log(data, isValid, errors);
+  function test(data) {
+    console.log('ok' + data);
+  }
+
+  function createUser(data) {
+    console.log(data)
+    props.onSubmit(data);
   }
 
   return (
@@ -30,7 +35,7 @@ function Register() {
         <h1 className="authorization__title">Добро пожаловать!</h1>
       </header>
       <main className="authorization__main">
-        <form onSubmit={handleSubmit(reg)} className="authorization__form">
+        <form onSubmit={handleSubmit(createUser)} className="authorization__form">
           <label htmlFor="username-input" className="authorization__form-label">
             Имя
             <input

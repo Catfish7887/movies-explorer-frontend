@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
-function Login() {
+function Login(props) {
   const {
     register,
     formState: { errors, isValid },
@@ -10,8 +10,8 @@ function Login() {
     mode: 'onChange',
   });
 
-  function log(data) {
-    console.log(data, isValid, errors);
+  function login(data) {
+    props.onSubmit(data);
   }
 
   return (
@@ -30,7 +30,7 @@ function Login() {
         <h1 className="authorization__title">Рады видеть!</h1>
       </header>
       <main className="authorization__main">
-        <form onSubmit={handleSubmit(log)} className="authorization__form">
+        <form onSubmit={handleSubmit(login)} className="authorization__form">
           <label htmlFor="email" className="authorization__form-label">
             Email
             <input

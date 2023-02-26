@@ -108,6 +108,7 @@
 
   .header__buttons {
     gap: 14px;
+    margin-bottom: 2px;
   }
 
   .header__link {
@@ -118,5 +119,6 @@
   .header__signin-button {
     font-size: 10px;
     line-height: 16px;
+    padding: 5px 12px;
   }
 }

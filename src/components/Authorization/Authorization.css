@@ -107,6 +107,7 @@
   align-items: center;
   justify-content: center;
   padding-top: 16px;
+  padding-bottom: 70px;
 }
 
 .authorization__footer-span {
@@ -136,6 +137,10 @@
 
   .authorization__form-submit_page_login {
     margin-top: 179px;
+  }
+
+  .authorization__footer{
+    padding-bottom: 232px;
   }
 }
 
@@ -168,6 +173,7 @@
 
   .authorization__footer{
     padding-top: 14px;
+    padding-bottom: 30px;
   }
 
   .authorization__footer-span {

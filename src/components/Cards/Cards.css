@@ -1,5 +1,6 @@
 .cards {
   /* padding: 80px 51px 30px 70px; */
+  padding-left: 20px;
   display: flex;
   padding-top: 80px;
   max-width: 1440px;

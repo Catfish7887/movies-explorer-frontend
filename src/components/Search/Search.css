@@ -1,5 +1,5 @@
 .search{
-  padding: 68px 0 70px;
+  padding: 68px 0 70px 13px;
   display: flex;
   width: 1140px;
   border-bottom: 1px solid #424242;
@@ -8,6 +8,7 @@
 
 @media screen and (max-width: 1279px) {
   .search{
+    padding-left: 0;
     padding-bottom: 109px;
     width: 708px;
   }

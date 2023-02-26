@@ -58,7 +58,7 @@
 
 @media screen and (max-width: 1439px) {
   .landing-header {
-    padding: 75px 70px;
+    padding: 75px 53px 75px 70px;
   }
 
   .landing-header__logo {

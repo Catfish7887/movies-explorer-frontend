@@ -32,8 +32,9 @@ function Login() {
       <main className="authorization__main">
         <form onSubmit={handleSubmit(log)} className="authorization__form">
           <label htmlFor="email" className="authorization__form-label">
-            Email
+            E-mail
             <input
+            placeholder={'Электронная почта'}
               type={'email'}
               className={errors.email ? 'authorization__form-input authorization__form-input_invalid' : 'authorization__form-input'}
               {...register('email', {
@@ -50,6 +51,7 @@ function Login() {
           <label htmlFor="password" className="authorization__form-label">
             Пароль
             <input
+            placeholder={'Пароль'}
               type={'password'}
               className={errors.password ? 'authorization__form-input authorization__form-input_invalid' : 'authorization__form-input'}
               {...register('password', {

@@ -124,7 +124,7 @@
   }
 
   .about__strip {
-    margin-top: 93px;
+    margin-top: 95px;
     grid-template-areas:
     'small big big big big big big'
     'back . . front front . . ';

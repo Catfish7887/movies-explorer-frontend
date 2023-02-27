@@ -1,6 +1,5 @@
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import mainApi from '../../utils/Api/MainApi';
 function Register(props) {
   const {
     register,

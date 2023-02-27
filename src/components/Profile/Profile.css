@@ -75,12 +75,22 @@
   font-size: 13px;
   line-height: 16px;
   color: white;
-  transition: opacity 0.3s linear;
+  transition: all 0.3s ease;
   margin-top: 204px;
   padding: 0;
+  cursor: default;
 }
 
-.profile__button:hover {
+.profile__button_disabled{
+  opacity: 0.5;
+}
+
+.profile__button_active{
+  color: #3ddc84;
+  cursor: pointer;
+}
+
+.profile__button_active:hover {
   opacity: 0.7;
 }
 
@@ -137,6 +147,10 @@
   }
   .profile__button{
     margin-top: 194px;
+  }
+
+  .profile__button_red-text{
+    margin-top: 16px;
   }
 
   .profile__submit-btn{

@@ -1,51 +1,55 @@
-import { mainApiConfig } from "../ApiConfig";
+import { mainApiConfig } from '../ApiConfig';
 
 class MainApi {
-  constructor(config){
+  constructor(config) {
     this._url = config.url;
     this._headers = config.headers;
   }
 
-  createUser({name, email, password}){
+  createUser({ name, email, password }) {
     return fetch(`${this._url}/signup`, {
-      method:'POST',
+      method: 'POST',
       headers: this._headers,
-      body: JSON.stringify({ name, email, password })
-    })
-      .then(res => this._handleResponce(res))
-  };
+      body: JSON.stringify({ name, email, password }),
+    }).then((res) => this._handleResponce(res));
+  }
 
-  signin({email, password}) {
+  signin({ email, password }) {
     return fetch(`${this._url}/signin`, {
-      method:'POST',
+      method: 'POST',
       headers: this._headers,
-      body: JSON.stringify({ email, password })
-    })
-      .then(res => this._handleResponce(res))
-  };
+      body: JSON.stringify({ email, password }),
+    }).then((res) => this._handleResponce(res));
+  }
 
   getCurrentUser() {
     return fetch(`${this._url}/users/me`, {
-      headers: this._headers
-    })
-      .then(res => this._handleResponce(res))
-  };
+      headers: this._headers,
+    }).then((res) => this._handleResponce(res));
+  }
+
+  checkToken(token) {
+    return fetch(`${this._url}/users/me`, {
+      headers: { ...this._headers,
+        "Authorization": `Bearer ${token}`
+      },
+    }).then((res) => this._handleResponce(res));
+  }
 
   injectToken() {
-    const token = localStorage.getItem('jwt')
+    const token = localStorage.getItem('jwt');
 
-    this._headers = {...this._headers, 'authorization':`Bearer ${token}`}
-  };
+    this._headers = { ...this._headers, authorization: `Bearer ${token}` };
+  }
 
   _handleResponce(res) {
     if (res.ok) {
-      return res.json()
+      return res.json();
     }
     // console.log(res)
-    throw new Error(`Статус ошибки: ${res.status}`)
-
+    throw new Error(`Статус ошибки: ${res.status}`);
   }
-};
+}
 
 const mainApi = new MainApi(mainApiConfig);
 

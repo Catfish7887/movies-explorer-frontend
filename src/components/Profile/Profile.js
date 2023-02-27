@@ -1,63 +1,90 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import CurrentUserContext from '../../contexts/currentUserContext';
 import Header from '../Header/Header';
+import { useForm } from 'react-hook-form';
 
 function Profile(props) {
-  const [isFormActive, setIsFormActive] = useState(false);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const currentUser = useContext(CurrentUserContext);
 
-  const currentUser = useContext(CurrentUserContext)
 
-  function showFormError(e){
-    e.preventDefault();
-    setIsButtonDisabled(true);
-    return;
-  };
+  const {
+    register,
+    formState: { errors, isValid, isDirty },
+    handleSubmit,
+  } = useForm({
+    mode: 'onChange',
+    defaultValues: currentUser
+  });
 
-  function activateForm() {
-    setIsFormActive(true);
-    console.log(currentUser)
-    return;
-  };
+  function showFormError(e) {
+    console.log(isValid && isDirty)
+  }
+
+  // function activateForm() {
+  //   setIsFormActive(true);
+  //   console.log(currentUser)
+  //   return;
+  // };
 
   return (
     <>
-      <Header isLoggedIn={true} openPopup={props.openPopup} />
+      <Header isLoggedIn={props.isLoggedIn} openPopup={props.openPopup} />
       <main className="profile">
-        <h1 className="profile__title">Привет, Виталий!</h1>
-        <form onSubmit={showFormError} className="profile__form">
+        <h1 className="profile__title">Привет, {currentUser.name}</h1>
+        <form onSubmit={handleSubmit(showFormError)} className="profile__form">
           <ul className="profile__user-info">
             <li className="profile__info-container">
               <label htmlFor="name-input" className="profile__info-element">
                 Имя
               </label>
-              <input placeholder='Имя пользователя' name="name-input" className="profile__info-input" defaultValue="some text" type="text" />
+              <input
+                placeholder={'Имя'}
+                type={'text'}
+                defaultValue={currentUser.name}
+                className={errors.name ? 'profile__info-input authorization__form-input_invalid' : 'profile__info-input'}
+                {...register('name', {
+                  required: 'Поле должно быть заполнено',
+                  minLength: {
+                    value: 2,
+                    message: 'Должно быть минимум 2 символа',
+                  },
+                  // validate: v => v !== currentUser.name || <p>Новое имя должно отличаться от старого</p>
+                })}
+              />
             </li>
             <li className="profile__info-container">
-              <label  htmlFor="email-input" className="profile__info-element">
+              <label htmlFor="email-input" className="profile__info-element">
                 E-mail
               </label>
-              <input placeholder='Электронная почта' name="email-input" className="profile__info-input" defaultValue="some text" type="text" />
+              <input
+                defaultValue={currentUser.email}
+                placeholder={'Электронная почта'}
+                type={'email'}
+                className={errors.email ? 'profile__info-input authorization__form-input_invalid' : 'profile__info-input'}
+                {...register('email', {
+                  required: 'Поле должно быть заполнено',
+                  pattern: {
+                    value: /[a-zA-Z0-9\.-\/-_~:\/?#\[\]!$&'()*+,;=]+@[a-zA-Z0-9\.-\/-_~:\/?#\[\]!$&'()*+,;=]+\.[a-zA-Z0-9\.-\/-_~:\/?#\[\]!$&'()*+,;=]+/i, //eslint-disable-line
+                    message: 'Email должен быть вида email@example.com',
+                  },
+                })}
+              />
             </li>
           </ul>
-          {isFormActive ? (
-          <>
-            <span className={isButtonDisabled ? 'profile__error-span' : 'profile__error-span_hidden'}>При обновлении профиля произошла ошибка.</span>
-            <button type='submit' className={isButtonDisabled ? 'profile__submit-btn profile__submit-btn_disabled' : 'profile__submit-btn profile__submit-btn_active'} disabled={isButtonDisabled}>Сохранить</button>
-          </>) : (<></>)}
+          <button aria-label="Редактировать профиль" className={isValid && isDirty ? 'profile__button profile__button_active' : 'profile__button profile__button_disabled'} type="submit">
+            Редактировать
+          </button>
+          <button
+            onClick={() => {
+              console.log(isDirty);
+            }}
+            aria-label="Выйти из аккаунта"
+            className="profile__button profile__button_red-text"
+            type="button"
+          >
+            Выйти из аккаунта
+          </button>
         </form>
-        {isFormActive ? (
-          <></>
-        ) : (
-          <>
-            <button onClick={activateForm} aria-label="Редактировать профиль" className="profile__button" type="submit">
-              Редактировать
-            </button>
-            <button aria-label="Выйти из аккаунта" className="profile__button profile__button_red-text" type="button">
-              Выйти из аккаунта
-            </button>
-          </>
-        )}
       </main>
     </>
   );

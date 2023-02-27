@@ -16,7 +16,7 @@ function Movies(props) {
 
   return (
     <>
-      <Header isLoggedIn={true} openPopup={props.openPopup} />
+      <Header isLoggedIn={props.isLoggedIn} openPopup={props.openPopup} />
       <main className="movies">
         <Search />
         <Cards cards={(<>

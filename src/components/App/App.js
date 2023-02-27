@@ -1,7 +1,7 @@
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import Main from '../Main/Main';
-// import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-// import AuthRoute from '../AuthRoute/AuthRoute';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import AuthRoute from '../AuthRoute/AuthRoute';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
@@ -12,23 +12,27 @@ import NavPopup from '../NavPopup/NavPopup';
 import { useEffect, useState } from 'react';
 import mainApi from '../../utils/Api/MainApi';
 import CurrentUserContext from '../../contexts/currentUserContext';
+import isLoggedInContext from '../../contexts/isLoggedInContext';
+import { set } from 'react-hook-form';
 
 function App() {
   const [isNavPopupOpened, setIsNavPopupOpened] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-  const [isLoggedIn, setIsloggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+
+// Проверка наличия токена при запуске приложения/обновлении страницы
+// Если есть токен - токен присоеднияется к заголовкам запроса, далее меняется стейт isLoggedIn,
+// срабатывает useEffect, который зависит от этой переменной, вызывается метод API, который использует токен и возвращает
+  useEffect(() => {checkToken()}, [])
 
   useEffect(() => {
     if (isLoggedIn) {
       mainApi
         .getCurrentUser()
         .then((data) => {
-          // console.log(data)
           setCurrentUser(data);
-          console.log(currentUser);
         })
-        .then(()=>{console.log(currentUser)})
         .catch((err) => {
           console.log(err);
         });
@@ -36,16 +40,37 @@ function App() {
     return;
   }, [isLoggedIn]);
 
+  function checkToken() {
+    const jwt = localStorage.getItem('jwt');
+
+    if (!jwt) return;
+
+
+
+    mainApi.checkToken(jwt)
+      .then(res => {
+        setIsLoggedIn(true)
+        setCurrentUser(res)
+      })
+      .then(() => mainApi.injectToken())
+      .catch((err) => {
+        if(err.message === 'Статус ошибки: 401'){
+          navigate('/signin')
+        }else{
+          console.log(err)
+        }
+      })
+
+  };
+
   function signIn(data) {
     mainApi
       .signin(data)
-      .then((data) => {
-        localStorage.setItem('jwt', data.token);
-        mainApi.injectToken();
+      .then((res) => {
+        localStorage.setItem('jwt', res.token);
+        setIsLoggedIn(true);
       })
-      .then(() => {
-        setIsloggedIn(true);
-      })
+      .then(() => mainApi.injectToken())
       .then(() => navigate('/'))
       .catch((err) => console.log(err));
   }
@@ -69,22 +94,19 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <Routes>
-        <Route path="/*" element={<NotFoundPage />} />
-        <Route path="/" element={<Main openPopup={openNavPopup} />} />
-        <Route path="/movies" element={<Movies openPopup={openNavPopup} />} />
-        <Route path="/profile" element={<Profile openPopup={openNavPopup} />} />
-        <Route path="/saved-movies" element={<SavedMovies openPopup={openNavPopup} />} />
-        <Route path="/signup" element={<Register onSubmit={createUser} />} />
-        <Route path="/signin" element={<Login onSubmit={signIn} />} />
+      <isLoggedInContext.Provider value={isLoggedIn}>
+        <Routes>
+          <Route path="/*" element={<NotFoundPage />} />
+          <Route path="/" element={<Main openPopup={openNavPopup} />} />
 
-        {/* <Route path="/profile" element={<ProtectedRoute isLoggedIn={true} component={<Profile openPopup={openNavPopup} />} />} />
-        <Route path="/movies" element={<ProtectedRoute isLoggedIn={true} component={<Movies openPopup={openNavPopup} />} />} />
-        <Route path="/saved-movies" element={<ProtectedRoute isLoggedIn={true} component={<SavedMovies openPopup={openNavPopup} />} />} />
-        <Route path="/register" element={<AuthRoute isLoggedIn={false} component={<Register />} />} />
-        <Route path="/login" element={<AuthRoute isLoggedIn={false} component={<Login />} />} /> */}
-      </Routes>
-      <NavPopup onClose={closeAllPopups} isOpened={isNavPopupOpened} />
+          <Route path="/profile" element={<ProtectedRoute isLoggedIn={isLoggedIn} component={<Profile isLoggedIn={isLoggedIn} openPopup={openNavPopup} />} />} />
+          <Route path="/movies" element={<ProtectedRoute isLoggedIn={isLoggedIn} component={<Movies isLoggedIn={isLoggedIn} openPopup={openNavPopup} />} />} />
+          <Route path="/saved-movies" element={<ProtectedRoute isLoggedIn={isLoggedIn} component={<SavedMovies isLoggedIn={isLoggedIn} openPopup={openNavPopup} />} />} />
+          <Route path="/signin" element={<AuthRoute isLoggedIn={isLoggedIn} component={<Login onSubmit={signIn} />} />} />
+          <Route path="/signup" element={<AuthRoute isLoggedIn={isLoggedIn} component={<Register onSubmit={createUser} />} />} />
+        </Routes>
+        <NavPopup onClose={closeAllPopups} isOpened={isNavPopupOpened} />
+      </isLoggedInContext.Provider>
     </CurrentUserContext.Provider>
   );
 }

@@ -69,7 +69,7 @@ function Register() {
             Пароль
             <input
             placeholder={'Пароль'}
-              type={'password'}
+               type={'password'}
               className={errors.password ? 'authorization__form-input authorization__form-input_invalid' : 'authorization__form-input'}
               {...register('password', {
                 required: 'Поле должно быть заполнено',

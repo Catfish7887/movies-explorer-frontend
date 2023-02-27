@@ -1,0 +1,134 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 120px 18px;
+}
+
+.header__navbar-container{
+  flex-grow: 1;
+  margin-left: 44px;
+}
+
+.header__buttons {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.header_page_landing {
+  background-color: #073042;
+}
+
+.header__link {
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-weight: 500;
+  line-height: 16px;
+  font-size: 12px;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.header__buttons{
+  margin-bottom: 3px;
+}
+
+.header__link:hover {
+  opacity: 0.7;
+}
+
+.header__signin-button {
+  padding: 8px 20px;
+  background-color: #3ddc84;
+  color: black;
+  border: none;
+  border-radius: 3px;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.header__signin-button:hover {
+  opacity: 0.7;
+}
+
+.header__logo-link {
+  cursor: pointer;
+  transition: opacity 0.7s ease;
+}
+
+.header__logo-link_active {
+  cursor: default;
+}
+
+.header__logo-link:hover {
+  opacity: 0.7;
+}
+
+.header__burger-button {
+  background-color: transparent;
+  border: none;
+  display: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  padding: 0;
+}
+
+.header__burger-button:hover {
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 1439px) {
+  .header{
+    padding: 18px 53px 17px 70px;
+  }
+}
+
+@media screen and (max-width: 1279px) {
+  .header {
+    align-items: normal;
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+
+  .header__navbar-container {
+    display: none;
+  }
+
+  .header__burger-button {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .header {
+    padding: 18px 14px;
+  }
+
+  .header__buttons {
+    gap: 14px;
+    margin-bottom: 2px;
+  }
+
+  .header__link {
+    font-size: 10px;
+    line-height: 16px;
+  }
+
+  .header__signin-button {
+    font-size: 10px;
+    line-height: 16px;
+    padding: 5px 12px;
+  }
+
+  .header__burger-button svg{
+    width: 40px;
+    height: 43px;
+  }
+}

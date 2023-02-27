@@ -1,0 +1,129 @@
+@keyframes preloader-inside-white {
+  0% {
+    -webkit-transform: scale(0, 0);
+    -moz-transform: scale(0, 0);
+    -ms-transform: scale(0, 0);
+    -o-transform: scale(0, 0);
+    transform: scale(0, 0);
+  }
+  100% {
+    -webkit-transform: scale(1, 1);
+    -moz-transform: scale(1, 1);
+    -ms-transform: scale(1, 1);
+    -o-transform: scale(1, 1);
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes preloader-inside-red {
+  0% {
+    -webkit-transform: scale(0, 0);
+    -moz-transform: scale(0, 0);
+    -ms-transform: scale(0, 0);
+    -o-transform: scale(0, 0);
+    transform: scale(0, 0);
+  }
+  30% {
+    -webkit-transform: scale(0, 0);
+    -moz-transform: scale(0, 0);
+    -ms-transform: scale(0, 0);
+    -o-transform: scale(0, 0);
+    transform: scale(0, 0);
+  }
+  100% {
+    -webkit-transform: scale(1, 1);
+    -moz-transform: scale(1, 1);
+    -ms-transform: scale(1, 1);
+    -o-transform: scale(1, 1);
+    transform: scale(1, 1);
+  }
+}
+
+.preloader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 59px 0 64px 20px;
+
+}
+
+.preloader__container {
+  width: 70px;
+  height: 70px;
+  position: relative;
+}
+
+.preloader__round {
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #3ddc84;
+  border-radius: 50px;
+}
+
+.preloader__round::after,
+.preloader__round::before {
+  content: '';
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50px;
+}
+
+.preloader__round::after {
+  background: white;
+  animation: preloader-inside-white 1s ease-in-out infinite;
+}
+
+.preloader__round::before {
+  z-index: 10;
+  background: #3ddc84;
+  animation: preloader-inside-red 1s ease-in-out infinite;
+}
+
+.preloader__button {
+  width: 320px;
+  height: 36px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  color: white;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background-color: #2F2F2F;
+  cursor: pointer;
+  transition: opacity 0.3s linear;
+  margin-top: 20px;
+  margin-bottom: 14px;
+}
+
+.preloader__button:hover{
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 1279px) {
+  .preloader{
+    padding-left: 0;
+    padding-top: 18px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .preloader{
+    padding: 30px 40px 66px;
+    width: auto;
+  }
+
+  .preloader__button{
+    width: 240px;
+    height: 36px;
+  }
+}

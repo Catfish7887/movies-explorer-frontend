@@ -8,10 +8,7 @@ function AboutMe() {
         <img className="about-me__avatar" alt="Фотография студента" src={avatar}></img>
         <small className="about-me__author-name">Даниил</small>
         <span className="about-me__author-info">Фронтенд-разработчик, 19 лет</span>
-        <p className="about-me__author-bio">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </p>
+        <p className="about-me__author-bio">Я родился и живу в Саратове, закончил факультет экономики СГУ. У меня есть жена и дочь. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить. С 2015 года работал в компании «СКБ Контур». После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и ушёл с постоянной работы.</p>
         <a href="https://github.com/catfish7887" className="about-me__link" target={'blank'}>
           Github
         </a>

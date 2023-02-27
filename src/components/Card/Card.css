@@ -92,8 +92,12 @@
   }
 }
 
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 767px) {
   .card {
     width: 300px;
+  }
+
+  .card__image{
+    height: 168px;
   }
 }

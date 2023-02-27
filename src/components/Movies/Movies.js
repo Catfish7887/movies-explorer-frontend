@@ -5,6 +5,7 @@ import Preloader from '../Preloader/Preloader';
 import Search from '../Search/Search';
 import moviesApi from '../../utils/Api/MoviesApi';
 
+import Card from '../Card/Card';
 
 function Movies(props) {
 
@@ -15,10 +16,23 @@ function Movies(props) {
 
   return (
     <>
-      <Header isLoggedIn={true} openPopup={props.openPopup}/>
+      <Header isLoggedIn={true} openPopup={props.openPopup} />
       <main className="movies">
-        <Search getFilms={getBeatFilms}/>
-        <Cards isSavedPage={false} />
+        <Search />
+        <Cards cards={(<>
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+        </>)} isSavedPage={false} />
         <Preloader />
       </main>
       <Footer />

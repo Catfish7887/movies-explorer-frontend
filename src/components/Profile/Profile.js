@@ -24,20 +24,20 @@ function Profile(props) {
     <>
       <Header isLoggedIn={true} openPopup={props.openPopup} />
       <main className="profile">
-        <h1 className="profile__title">Привет, пользователь!</h1>
+        <h1 className="profile__title">Привет, Виталий!</h1>
         <form onSubmit={showFormError} className="profile__form">
           <ul className="profile__user-info">
             <li className="profile__info-container">
               <label htmlFor="name-input" className="profile__info-element">
                 Имя
               </label>
-              <input name="name-input" className="profile__info-input" defaultValue="some text" type="text" />
+              <input placeholder='Имя пользователя' name="name-input" className="profile__info-input" defaultValue="some text" type="text" />
             </li>
             <li className="profile__info-container">
-              <label htmlFor="email-input" className="profile__info-element">
-                Email
+              <label  htmlFor="email-input" className="profile__info-element">
+                E-mail
               </label>
-              <input name="email-input" className="profile__info-input" defaultValue="some text" type="text" />
+              <input placeholder='Электронная почта' name="email-input" className="profile__info-input" defaultValue="some text" type="text" />
             </li>
           </ul>
           {isFormActive ? (

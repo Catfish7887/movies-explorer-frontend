@@ -32,7 +32,7 @@
 
 .tech__container {
   display: flex;
-  gap: 10px;
+  gap: 16px;
   margin: 100px 0 0;
   padding: 0;
 }
@@ -55,7 +55,7 @@
 
 @media screen and (max-width: 1439px) {
   .tech {
-    padding: 100px 70px;
+    padding: 102px 53px 104px 70px;
   }
 }
 
@@ -70,14 +70,27 @@
 
   .tech__text {
     margin-top: 22px;
+    font-size: 12px;
+    line-height: 18px;
   }
 
   .tech__container {
     margin-top: 83px;
+    gap: 10px;
+  }
+
+  .tech__item {
+    font-size: 12px;
+    line-height: 15px;
   }
 }
 
 @media screen and (max-width: 767px) {
+
+  .tech__section-title{
+    border: none;
+  }
+
   .tech {
     padding: 70px 18px;
     background-color: transparent;
@@ -87,6 +100,7 @@
     font-size: 30px;
     line-height: 36px;
     margin-top: 60px;
+    letter-spacing: -0.04em;
   }
 
   .tech__text {

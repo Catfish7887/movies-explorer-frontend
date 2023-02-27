@@ -1,21 +1,23 @@
 .search{
-  padding: 70px 0 69px;
-  width: 100%;
+  padding: 68px 0 70px 13px;
+  display: flex;
+  width: 1140px;
+  border-bottom: 1px solid #424242;
 }
 
 
 @media screen and (max-width: 1279px) {
   .search{
-    padding: 80px 30px 109px;
+    padding-left: 0;
+    padding-bottom: 109px;
+    width: 708px;
   }
 }
 
 @media screen and (max-width: 767px) {
   .search{
-    padding: 80px 10px 45px;
+    padding: 72px 0 36px;
+    width: 300px;
   }
 
-  .search::after{
-    left: 10px;
-  }
 }

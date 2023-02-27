@@ -14,7 +14,7 @@
   font-size: 24px;
   line-height: 29px;
   color: white;
-  margin: 40px 0 40px;
+  margin: 37px 0 40px;
   width: 396px
 }
 
@@ -22,7 +22,6 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 20px;
   max-width: 396px;
   margin: 0 auto 0;
 }
@@ -36,7 +35,7 @@
   color: #8b8b8b;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 9px;
 }
 
 .authorization__form-input {
@@ -84,7 +83,7 @@
   border: none;
   border-radius: 3px;
   cursor: pointer;
-  margin-top: 69px;
+  margin-top: 71px;
   transition: all 0.3s linear;
 }
 
@@ -99,7 +98,7 @@
 
 .authorization__form-submit_page_login {
   padding: 14px 177px 14px;
-  margin-top: 179px;
+  margin-top: 159px;
 }
 
 .authorization__footer {
@@ -107,6 +106,7 @@
   align-items: center;
   justify-content: center;
   padding-top: 16px;
+  padding-bottom: 70px;
 }
 
 .authorization__footer-span {
@@ -127,6 +127,11 @@
   line-height: 17px;
   color: #4285f4;
   text-decoration: none;
+  transition: opacity 0.3s linear;
+}
+
+.authorization__footer-link:hover{
+  opacity: 0.7;
 }
 
 @media screen and (max-width: 1279px) {
@@ -134,8 +139,8 @@
     padding-top: 232px;
   }
 
-  .authorization__form-submit_page_login {
-    margin-top: 179px;
+  .authorization__footer{
+    padding-bottom: 232px;
   }
 }
 
@@ -146,7 +151,7 @@
   }
 
   .authorization__title {
-    margin: 50px 0 80px;
+    margin: 48px 0 80px;
     width: auto;
   }
 
@@ -159,7 +164,7 @@
 
   .authorization__form-submit_page_login {
     padding: 15px 112px;
-    margin-top: 267px;
+    margin-top: 245px;
   }
 
   .authorization__form {
@@ -168,6 +173,7 @@
 
   .authorization__footer{
     padding-top: 14px;
+    padding-bottom: 30px;
   }
 
   .authorization__footer-span {
@@ -181,6 +187,6 @@
   }
 
   .authorization__form-input {
-    width: 260px;
+    width: 230px;
   }
 }

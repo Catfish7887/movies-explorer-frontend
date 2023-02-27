@@ -37,13 +37,27 @@
   color: #4285f4;
   text-decoration: none;
   transition: opacity 0.8s ease;
+  padding-bottom: 60px;
 }
 
 .not-found__link:hover {
   opacity: 0.7;
 }
 
+@media screen and (max-width: 1279px) {
+  .not-found{
+    padding-top: 408px;
+  }
+  .not-found__link{
+    padding-bottom: 222px;
+  }
+}
+
 @media screen and (max-width: 767px) {
+  .not-found{
+    padding-top: 329px;
+  }
+
   .not-found__title {
     font-size: 80px;
     line-height: 97px;
@@ -59,5 +73,6 @@
     margin-top: 284px;
     font-size: 12px;
     line-height: 15px;
+    padding-bottom: 30px;
   }
 }

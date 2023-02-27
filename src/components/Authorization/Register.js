@@ -39,6 +39,7 @@ function Register(props) {
           <label htmlFor="username-input" className="authorization__form-label">
             Имя
             <input
+            placeholder={'Имя'}
               type={'text'}
               className={errors.name ? 'authorization__form-input authorization__form-input_invalid' : 'authorization__form-input'}
               {...register('name', {
@@ -53,8 +54,9 @@ function Register(props) {
           </label>
 
           <label htmlFor="email-input" className="authorization__form-label">
-            Email
+            E-mail
             <input
+              placeholder={'Электронная почта'}
               type={'email'}
               className={errors.email ? 'authorization__form-input authorization__form-input_invalid' : 'authorization__form-input'}
               {...register('email', {
@@ -71,7 +73,8 @@ function Register(props) {
           <label htmlFor="password-input" className="authorization__form-label">
             Пароль
             <input
-              type={'password'}
+            placeholder={'Пароль'}
+               type={'password'}
               className={errors.password ? 'authorization__form-input authorization__form-input_invalid' : 'authorization__form-input'}
               {...register('password', {
                 required: 'Поле должно быть заполнено',

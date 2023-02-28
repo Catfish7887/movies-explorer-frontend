@@ -130,11 +130,19 @@
   font-size: 11px;
   line-height: 13px;
   color: #ff004c;
-  margin-top: 203px;
+  /* margin-top: 203px; */
+  visibility: hidden;
 }
 
-.profile__error-span_hidden {
-  visibility: hidden;
+.profile__error-span_shown {
+  visibility: visible;
+}
+
+.profile__form-errors{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
 }
 
 @media screen and (max-width: 1279px) {
@@ -158,7 +166,7 @@
   }
 
   .profile__error-span{
-    margin-top: 131px;
+    /* margin-top: 131px; */
   }
 
   .profile__submit-btn_disabled{
@@ -191,7 +199,7 @@
   }
 
   .profile__error-span{
-    margin-top: 315px;
+    /* margin-top: 315px; */
   }
 
   .profile__submit-btn_disabled{

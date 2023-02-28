@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 
 function Profile(props) {
   const currentUser = useContext(CurrentUserContext);
-
+  const [errMessage, setErrMessage] = useState('');
 
   const {
     register,
@@ -13,11 +13,16 @@ function Profile(props) {
     handleSubmit,
   } = useForm({
     mode: 'onChange',
-    defaultValues: currentUser
+    defaultValues: currentUser,
   });
 
-  function showFormError(e) {
-    console.log(isValid && isDirty)
+  function showFormError(err) {
+    setErrMessage(err.message)
+    console.log(err.message)
+  }
+
+  function editProfile(data) {
+    props.onSubmit(data, showFormError);
   }
 
   // function activateForm() {
@@ -28,10 +33,10 @@ function Profile(props) {
 
   return (
     <>
-      <Header isLoggedIn={props.isLoggedIn} openPopup={props.openPopup} />
+      <Header openPopup={props.openPopup} />
       <main className="profile">
         <h1 className="profile__title">Привет, {currentUser.name}</h1>
-        <form onSubmit={handleSubmit(showFormError)} className="profile__form">
+        <form onSubmit={handleSubmit(editProfile)} className="profile__form">
           <ul className="profile__user-info">
             <li className="profile__info-container">
               <label htmlFor="name-input" className="profile__info-element">
@@ -46,9 +51,12 @@ function Profile(props) {
                   required: 'Поле должно быть заполнено',
                   minLength: {
                     value: 2,
-                    message: 'Должно быть минимум 2 символа',
+                    message: 'должно быть минимум 2 символа',
                   },
-                  // validate: v => v !== currentUser.name || <p>Новое имя должно отличаться от старого</p>
+                  // pattern: {
+                  //   value: '',
+                  //   message: ''
+                  // }
                 })}
               />
             </li>
@@ -71,13 +79,20 @@ function Profile(props) {
               />
             </li>
           </ul>
-          <button aria-label="Редактировать профиль" className={isValid && isDirty ? 'profile__button profile__button_active' : 'profile__button profile__button_disabled'} type="submit">
+          {!isValid || errMessage !== '' ? (
+            <div className="profile__form-errors">
+              {errors.name ? <span className={`profile__error-span ${!isValid ? `profile__error-span_shown` : ``}`}>{errors.name?.message ? `В поле имя: ${errors.name.message}` : 'Произошла неизвестная ошибка'}</span> : <></>}
+              {errors.email ? <span className={`profile__error-span ${!isValid ? `profile__error-span_shown` : ``}`}>{errors.email?.message ? `В поле электронной почты: ${errors.email.message}` : 'Произошла неизвестная ошибка'}</span> : <></>}
+              {errMessage !== '' ? <span className='profile__error-span profile__error-span_shown'>{errMessage === 'Failed to fetch' ? `При обновлении профиля произошла ошибка. Проверьте Ваше интернет-соединение` : errMessage}</span> : <></>}
+            </div>
+          ) : (
+            <></>
+          )}
+          <button disabled = {!(isValid && isDirty)} aria-label="Редактировать профиль" className={isValid && isDirty ? 'profile__button profile__button_active' : 'profile__button profile__button_disabled'} type="submit">
             Редактировать
           </button>
           <button
-            onClick={() => {
-              console.log(isDirty);
-            }}
+            onClick={props.onLogout}
             aria-label="Выйти из аккаунта"
             className="profile__button profile__button_red-text"
             type="button"

@@ -82,12 +82,24 @@ function App() {
       .catch((err) => console.log(err));
   }
 
+  function editUser(data, doSomethingOnError) {
+    mainApi.updateUser(data)
+      .then((res) => setCurrentUser(res))
+      .catch((err) => doSomethingOnError(err))
+  }
+
   function openNavPopup() {
     setIsNavPopupOpened(true);
   }
 
   function closeAllPopups() {
     setIsNavPopupOpened(false);
+  }
+
+  function handleLogout() {
+    localStorage.removeItem('jwt');
+    setIsLoggedIn(false);
+    navigate('/')
   }
 
   console.log();
@@ -99,7 +111,7 @@ function App() {
           <Route path="/*" element={<NotFoundPage />} />
           <Route path="/" element={<Main openPopup={openNavPopup} />} />
 
-          <Route path="/profile" element={<ProtectedRoute isLoggedIn={isLoggedIn} component={<Profile isLoggedIn={isLoggedIn} openPopup={openNavPopup} />} />} />
+          <Route path="/profile" element={<ProtectedRoute isLoggedIn={isLoggedIn} component={<Profile onLogout={handleLogout} onSubmit={editUser} openPopup={openNavPopup} />} />} />
           <Route path="/movies" element={<ProtectedRoute isLoggedIn={isLoggedIn} component={<Movies isLoggedIn={isLoggedIn} openPopup={openNavPopup} />} />} />
           <Route path="/saved-movies" element={<ProtectedRoute isLoggedIn={isLoggedIn} component={<SavedMovies isLoggedIn={isLoggedIn} openPopup={openNavPopup} />} />} />
           <Route path="/signin" element={<AuthRoute isLoggedIn={isLoggedIn} component={<Login onSubmit={signIn} />} />} />

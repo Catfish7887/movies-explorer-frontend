@@ -1,4 +1,5 @@
 import { mainApiConfig } from '../ApiConfig';
+import ApiError from '../ApiError/ApiError';
 
 class MainApi {
   constructor(config) {
@@ -21,6 +22,14 @@ class MainApi {
       body: JSON.stringify({ email, password }),
     }).then((res) => this._handleResponce(res));
   }
+
+  updateUser({name, email}) {
+    return fetch(`${this._url}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({ name,email }),
+    }).then((res) => this._handleResponce(res))
+  };
 
   getCurrentUser() {
     return fetch(`${this._url}/users/me`, {
@@ -46,8 +55,7 @@ class MainApi {
     if (res.ok) {
       return res.json();
     }
-    // console.log(res)
-    throw new Error(`Статус ошибки: ${res.status}`);
+      throw res;
   }
 }
 

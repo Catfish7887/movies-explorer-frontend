@@ -16,7 +16,7 @@ class MoviesApi {
     if (res.ok) {
       return res.json();
     }
-    throw new Error(`Статус ошибки: ${res.status}`);
+      throw res;
   }
 }
 

@@ -12,7 +12,7 @@
     "sourceType": "module"
   },
   "rules": {
-    "no-underscore-dangle":  ["error", { "allow": ["_url", "_headers", "_handleResponce"] }]
+    "no-underscore-dangle":  ["error", { "allow": ["_url", "_headers", "_handleResponce", "_id"] }]
 
   }
 }

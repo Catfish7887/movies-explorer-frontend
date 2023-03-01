@@ -13,11 +13,12 @@ import { useEffect, useState } from 'react';
 import mainApi from '../../utils/Api/MainApi';
 import CurrentUserContext from '../../contexts/currentUserContext';
 import isLoggedInContext from '../../contexts/isLoggedInContext';
-import { set } from 'react-hook-form';
+import moviesApi from '../../utils/Api/MoviesApi';
 
 function App() {
   const [isNavPopupOpened, setIsNavPopupOpened] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const [movies, setMovies] = useState([])
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
@@ -88,6 +89,11 @@ function App() {
       .catch((err) => doSomethingOnError(err))
   }
 
+  function getBeatFilms() {
+    moviesApi.getFilms()
+      .then((res)=> setMovies(res))
+  };
+
   function openNavPopup() {
     setIsNavPopupOpened(true);
   }
@@ -112,7 +118,7 @@ function App() {
           <Route path="/" element={<Main openPopup={openNavPopup} />} />
 
           <Route path="/profile" element={<ProtectedRoute isLoggedIn={isLoggedIn} component={<Profile onLogout={handleLogout} onSubmit={editUser} openPopup={openNavPopup} />} />} />
-          <Route path="/movies" element={<ProtectedRoute isLoggedIn={isLoggedIn} component={<Movies isLoggedIn={isLoggedIn} openPopup={openNavPopup} />} />} />
+          <Route path="/movies" element={<ProtectedRoute isLoggedIn={isLoggedIn} component={<Movies movies={movies} getMovies={getBeatFilms} isLoggedIn={isLoggedIn} openPopup={openNavPopup} />} />} />
           <Route path="/saved-movies" element={<ProtectedRoute isLoggedIn={isLoggedIn} component={<SavedMovies isLoggedIn={isLoggedIn} openPopup={openNavPopup} />} />} />
           <Route path="/signin" element={<AuthRoute isLoggedIn={isLoggedIn} component={<Login onSubmit={signIn} />} />} />
           <Route path="/signup" element={<AuthRoute isLoggedIn={isLoggedIn} component={<Register onSubmit={createUser} />} />} />

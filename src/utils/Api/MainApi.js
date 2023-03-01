@@ -1,5 +1,4 @@
 import { mainApiConfig } from '../ApiConfig';
-import ApiError from '../ApiError/ApiError';
 
 class MainApi {
   constructor(config) {

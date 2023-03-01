@@ -1,20 +1,22 @@
-import { useState } from "react";
-
+import { useState } from 'react';
+import { moviesApiConfig } from '../../utils/ApiConfig';
 function Card(props) {
   const [likeStatus, setLikeStatus] = useState(false);
   // const isSavedPage = props.isSavedPage;
 
+  const { data } = props;
+
   function likeCard() {
-    setLikeStatus(!likeStatus)
+    setLikeStatus(!likeStatus);
     return;
-  };
+  }
 
   return (
     <>
       <li className="card">
         <div className="card__head">
-          <h3 className="card__name">Name</h3>
-          <span className="card__duration">1111</span>
+          <h3 className="card__name">{data?.nameRU || 'Название фильма'}</h3>
+          <span className="card__duration">{data?.duration || 'Длительность фильма'}</span>
           {window.location.pathname === '/saved-movies' ? (
             <button className="card__favorites-button card__favorites-button_saved">
               <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -35,7 +37,9 @@ function Card(props) {
             </button>
           )}
         </div>
-        <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" className="card__image" alt="Превью фильма" />
+        <a href={data.trailerLink} target='blank' className='card__trailer-link'>
+          <img src={data.image.url ? `https://api.nomoreparties.co/${data.image.url}` : `https://images.unsplash.com/photo-1543536448-d209d2d13a1c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80`} className="card__image" alt="Превью фильма" />
+        </a>
       </li>
     </>
   );

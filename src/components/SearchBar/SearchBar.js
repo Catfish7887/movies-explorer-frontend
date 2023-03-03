@@ -1,8 +1,14 @@
+import { useRef } from "react";
+
 function SearchBar(props) {
+
+  const inputText = useRef(null);
+  const checkbox = useRef(null);
 
   function findFilms(e){
     e.preventDefault()
-    props.onSubmit()
+    // props.onSubmit(inputText.current.value, checkbox.current.checked)
+    props.onSubmit(inputText.current.value, checkbox.current.checked)
   };
 
   return (
@@ -17,14 +23,14 @@ function SearchBar(props) {
       </svg>
       <form onSubmit={findFilms} className="searchform">
         <div className="searchform__input-container">
-          <input type="text" name="film-input" placeholder="Фильм" className="searchform__input" />
+          <input ref={inputText} type="text" name="film-input" placeholder="Фильм" className="searchform__input" />
           <button type="submit" className="searchform__submit-button">
             Найти
           </button>
         </div>
         <div className="searchform__checkbox-container">
           <label className="searchform__label">
-            <input className="searchform__checkbox" type="checkbox" name="film-checkbox" />
+            <input ref={checkbox} className="searchform__checkbox" type="checkbox" name="film-checkbox" />
             <span className="searchform__checkbox-toggle"></span>
           </label>
           <span className="searchform__checkbox-span">Короткометражки</span>

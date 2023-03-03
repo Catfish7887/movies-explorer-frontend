@@ -11,18 +11,23 @@ function Profile(props) {
     register,
     formState: { errors, isValid, isDirty },
     handleSubmit,
+    reset,
   } = useForm({
     mode: 'onChange',
     defaultValues: currentUser,
   });
 
   function showFormError(err) {
-    setErrMessage(err.message)
-    console.log(err.message)
+    setErrMessage(err.message);
+    console.log(err.message);
   }
 
   function editProfile(data) {
     props.onSubmit(data, showFormError);
+    if (errMessage === ''){
+      reset({
+      }, {keepDefaultValues: false})
+    }
   }
 
   // function activateForm() {
@@ -83,20 +88,15 @@ function Profile(props) {
             <div className="profile__form-errors">
               {errors.name ? <span className={`profile__error-span ${!isValid ? `profile__error-span_shown` : ``}`}>{errors.name?.message ? `В поле имя: ${errors.name.message}` : 'Произошла неизвестная ошибка'}</span> : <></>}
               {errors.email ? <span className={`profile__error-span ${!isValid ? `profile__error-span_shown` : ``}`}>{errors.email?.message ? `В поле электронной почты: ${errors.email.message}` : 'Произошла неизвестная ошибка'}</span> : <></>}
-              {errMessage !== '' ? <span className='profile__error-span profile__error-span_shown'>{errMessage === 'Failed to fetch' ? `При обновлении профиля произошла ошибка. Проверьте Ваше интернет-соединение` : errMessage}</span> : <></>}
+              {errMessage !== '' ? <span className="profile__error-span profile__error-span_shown">{errMessage === 'Failed to fetch' ? `При обновлении профиля произошла ошибка. Проверьте Ваше интернет-соединение` : errMessage}</span> : <></>}
             </div>
           ) : (
             <></>
           )}
-          <button disabled = {!(isValid && isDirty)} aria-label="Редактировать профиль" className={isValid && isDirty ? 'profile__button profile__button_active' : 'profile__button profile__button_disabled'} type="submit">
+          <button disabled={!(isValid && isDirty)} aria-label="Редактировать профиль" className={isValid && isDirty ? 'profile__button profile__button_active' : 'profile__button profile__button_disabled'} type="submit">
             Редактировать
           </button>
-          <button
-            onClick={props.onLogout}
-            aria-label="Выйти из аккаунта"
-            className="profile__button profile__button_red-text"
-            type="button"
-          >
+          <button onClick={props.onLogout} aria-label="Выйти из аккаунта" className="profile__button profile__button_red-text" type="button">
             Выйти из аккаунта
           </button>
         </form>

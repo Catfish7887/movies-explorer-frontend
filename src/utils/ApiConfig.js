@@ -6,7 +6,7 @@ export const moviesApiConfig = {
 };
 
 export const mainApiConfig = {
-  url: 'http://localhost:4000',
+  url: 'https://api-klochkoff.nomoredomains.club',
   headers: {
     'content-type': 'application/json',
   },

@@ -18,14 +18,16 @@ import moviesApi from '../../utils/Api/MoviesApi';
 function App() {
   const [isNavPopupOpened, setIsNavPopupOpened] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-  const [movies, setMovies] = useState([])
+  const [movies, setMovies] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
-// Проверка наличия токена при запуске приложения/обновлении страницы
-// Если есть токен - токен присоеднияется к заголовкам запроса, далее меняется стейт isLoggedIn,
-// срабатывает useEffect, который зависит от этой переменной, вызывается метод API, который использует токен и возвращает
-  useEffect(() => {checkToken()}, [])
+  // Проверка наличия токена при запуске приложения/обновлении страницы
+  // Если есть токен - токен присоеднияется к заголовкам запроса, далее меняется стейт isLoggedIn,
+  // срабатывает useEffect, который зависит от этой переменной, вызывается метод API, который использует токен и возвращает
+  useEffect(() => {
+    checkToken();
+  }, []);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -46,23 +48,21 @@ function App() {
 
     if (!jwt) return;
 
-
-
-    mainApi.checkToken(jwt)
-      .then(res => {
-        setIsLoggedIn(true)
-        setCurrentUser(res)
+    mainApi
+      .checkToken(jwt)
+      .then((res) => {
+        setIsLoggedIn(true);
+        setCurrentUser(res);
       })
       .then(() => mainApi.injectToken())
       .catch((err) => {
-        if(err.message === 'Статус ошибки: 401'){
-          navigate('/signin')
-        }else{
-          console.log(err)
+        if (err.message === 'Статус ошибки: 401') {
+          navigate('/signin');
+        } else {
+          console.log(err);
         }
-      })
-
-  };
+      });
+  }
 
   function signIn(data) {
     mainApi
@@ -84,15 +84,17 @@ function App() {
   }
 
   function editUser(data, doSomethingOnError) {
-    mainApi.updateUser(data)
-      .then((res) => setCurrentUser(res))
-      .catch((err) => doSomethingOnError(err))
+    mainApi
+      .updateUser(data)
+      .then((res) => {
+        setCurrentUser(res);
+      })
+      .catch((err) => doSomethingOnError(err));
   }
 
   function getBeatFilms() {
-    moviesApi.getFilms()
-      .then((res)=> setMovies(res))
-  };
+    moviesApi.getFilms().then((res) => setMovies(res));
+  }
 
   function openNavPopup() {
     setIsNavPopupOpened(true);
@@ -105,7 +107,7 @@ function App() {
   function handleLogout() {
     localStorage.removeItem('jwt');
     setIsLoggedIn(false);
-    navigate('/')
+    navigate('/');
   }
 
   console.log();

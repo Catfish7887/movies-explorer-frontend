@@ -1,23 +1,26 @@
 import { useState } from 'react';
 
-const Preloader = () => {
-  const [isLoading, setIsLoading] = useState(false);
-
-  function showLoading() {
-    setIsLoading(true);
-    return;
-  }
+const Preloader = (props) => {
+  const {isShown, isLoading} = props;
 
   return (
     <div className="preloader">
-      {isLoading ? (
-        <div className="preloader__container">
-          <span className="preloader__round"></span>
-        </div>
-      ) : (
+      {isShown ? (
         <>
-          <button onClick={showLoading} type='button' aria-label='Загрузить ещё фильмы' className='preloader__button'>Ещё</button>
+          {isLoading ? (
+            <div className="preloader__container">
+              <span className="preloader__round"></span>
+            </div>
+          ) : (
+            <>
+              <button onClick={props.loadCards} type="button" aria-label="Загрузить ещё фильмы" className="preloader__button">
+                Ещё
+              </button>
+            </>
+          )}
         </>
+      ) : (
+        <div className="preloader__plug"></div>
       )}
     </div>
   );

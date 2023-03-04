@@ -19,6 +19,7 @@ function App() {
   const [isNavPopupOpened, setIsNavPopupOpened] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [movies, setMovies] = useState([]);
+  const [likedCards, setLikedCards] = useState([])
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
@@ -96,6 +97,14 @@ function App() {
     moviesApi.getFilms().then((res) => setMovies(res));
   }
 
+  function likeCard({country, director, duration, year, description, image, trailerLink, thumbnail, owner, movieId, nameRU, nameEN}) {
+    mainApi.likeCard({country, director, duration, year, description, image, trailerLink, thumbnail, owner, movieId, nameRU, nameEN})
+      .then((card) => {
+        setLikedCards(likedCards.push(card))
+      })
+      .catch((err)=>{console.log(err)})
+  }
+
   function openNavPopup() {
     setIsNavPopupOpened(true);
   }
@@ -121,7 +130,7 @@ function App() {
 
           <Route path="/profile" element={<ProtectedRoute isLoggedIn={isLoggedIn} component={<Profile onLogout={handleLogout} onSubmit={editUser} openPopup={openNavPopup} />} />} />
           <Route path="/movies" element={<ProtectedRoute isLoggedIn={isLoggedIn} component={<Movies movies={movies} getMovies={getBeatFilms} isLoggedIn={isLoggedIn} openPopup={openNavPopup} />} />} />
-          <Route path="/saved-movies" element={<ProtectedRoute isLoggedIn={isLoggedIn} component={<SavedMovies isLoggedIn={isLoggedIn} openPopup={openNavPopup} />} />} />
+          <Route path="/saved-movies" element={<ProtectedRoute isLoggedIn={isLoggedIn} component={<SavedMovies savedMovies={likedCards} isLoggedIn={isLoggedIn} openPopup={openNavPopup} />} />} />
           <Route path="/signin" element={<AuthRoute isLoggedIn={isLoggedIn} component={<Login onSubmit={signIn} />} />} />
           <Route path="/signup" element={<AuthRoute isLoggedIn={isLoggedIn} component={<Register onSubmit={createUser} />} />} />
         </Routes>

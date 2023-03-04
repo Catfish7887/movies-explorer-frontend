@@ -48,14 +48,21 @@
   font-size: 11px;
   line-height: 18px;
   color: #fff;
-  cursor: pointer;
   transition: all 0.3s linear;
   /* mb1 */
 }
 
-.searchform__submit-button:hover{
+
+.searchform__submit-button_active:hover{
+  cursor: pointer;
   background-color: #3ddc84;
 }
+
+.searchform__submit-button_disabled{
+  cursor: default;
+  opacity: 0.5;
+}
+
 
 .searchform__label {
   cursor: pointer;
@@ -84,6 +91,7 @@
   font-size: 18px;
   line-height: 20px;
   color: #8b8b8b;
+
 }
 
 .searchform__checkbox-container {

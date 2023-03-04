@@ -110,7 +110,11 @@
 }
 
 .preloader__plug{
-  padding-bottom: 280px;
+  padding-bottom: 166px;
+}
+
+.preloader__plug_cards_true{
+  padding-bottom: 66px;
 }
 
 @media screen and (max-width: 1279px) {
@@ -124,6 +128,13 @@
   .preloader{
     padding: 30px 40px 66px;
     width: auto;
+  }
+
+  .preloader__plug{
+    padding-bottom: 260px;
+  }
+  .preloader__plug_cards_true{
+    padding-bottom: 8px;
   }
 
   .preloader__button{

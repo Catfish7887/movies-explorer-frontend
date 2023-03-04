@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const Preloader = (props) => {
-  const {isShown, isLoading} = props;
+  const {isShown, isLoading, hasMovies} = props;
 
   return (
     <div className="preloader">
@@ -20,7 +20,7 @@ const Preloader = (props) => {
           )}
         </>
       ) : (
-        <div className="preloader__plug"></div>
+        <div className={hasMovies ? 'preloader__plug preloader__plug_cards_true' : 'preloader__plug'}></div>
       )}
     </div>
   );

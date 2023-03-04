@@ -6,6 +6,22 @@ class MainApi {
     this._headers = config.headers;
   }
 
+  likeCard({country, director, duration, year, description, image, trailerLink, thumbnail, owner, movieId, nameRU, nameEN}) {
+    return fetch(`${this._url}/movies`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({ country, director, duration, year, description, image, trailerLink, thumbnail, owner, movieId, nameRU, nameEN }),
+    }).then((res) => this._handleResponce(res));
+  }
+
+  dislikeCard(movieId){
+    return fetch(`${this._url}/movies`, {
+      method: 'DELETE',
+      headers: this._headers,
+      body: JSON.stringify({ movieId })
+    }).then((res) => this._handleResponce(res))
+  }
+
   createUser({ name, email, password }) {
     return fetch(`${this._url}/signup`, {
       method: 'POST',
@@ -22,13 +38,13 @@ class MainApi {
     }).then((res) => this._handleResponce(res));
   }
 
-  updateUser({name, email}) {
+  updateUser({ name, email }) {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
-      body: JSON.stringify({ name,email }),
-    }).then((res) => this._handleResponce(res))
-  };
+      body: JSON.stringify({ name, email }),
+    }).then((res) => this._handleResponce(res));
+  }
 
   getCurrentUser() {
     return fetch(`${this._url}/users/me`, {
@@ -38,9 +54,7 @@ class MainApi {
 
   checkToken(token) {
     return fetch(`${this._url}/users/me`, {
-      headers: { ...this._headers,
-        "Authorization": `Bearer ${token}`
-      },
+      headers: { ...this._headers, Authorization: `Bearer ${token}` },
     }).then((res) => this._handleResponce(res));
   }
 
@@ -54,7 +68,7 @@ class MainApi {
     if (res.ok) {
       return res.json();
     }
-      throw res;
+    throw res;
   }
 }
 

@@ -15,7 +15,7 @@ class MainApi {
   }
 
   dislikeCard(movieId){
-    return fetch(`${this._url}/movies`, {
+    return fetch(`${this._url}/movies/${movieId}`, {
       method: 'DELETE',
       headers: this._headers,
       body: JSON.stringify({ movieId })
@@ -55,6 +55,12 @@ class MainApi {
   checkToken(token) {
     return fetch(`${this._url}/users/me`, {
       headers: { ...this._headers, Authorization: `Bearer ${token}` },
+    }).then((res) => this._handleResponce(res));
+  }
+
+  getMovies() {
+    return fetch(`${this._url}/movies`, {
+      headers: this._headers,
     }).then((res) => this._handleResponce(res));
   }
 

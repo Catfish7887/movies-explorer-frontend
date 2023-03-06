@@ -5,8 +5,9 @@ import Preloader from '../Preloader/Preloader';
 import Search from '../Search/Search';
 import moviesApi from '../../utils/Api/MoviesApi';
 
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import findFilms from '../../utils/functions/search';
+import savedMoviesContext from '../../contexts/savedMovies';
 
 function Movies(props) {
   const [movies, setMovies] = useState([]);
@@ -17,6 +18,8 @@ function Movies(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [isPreloaderShown, setIsPreloaderShown] = useState(false);
   const [searchFormData, setSearchFormData] = useState({});
+  const savedMovies = useContext(savedMoviesContext)
+  const [savedMoviesIDs, setSavedMoviesIDs] = useState([]);
 
   const resultMoviesArray = filteredMovies.slice(0, renderSize);
 
@@ -27,10 +30,10 @@ function Movies(props) {
     // debugger;
 
     if (data && movies) {
-      setSpanHidden(true)
+      setSpanHidden(true);
       setFilteredMovies(JSON.parse(movies));
       setSearchFormData(JSON.parse(data));
-      setIsPreloaderShown(true)
+      setIsPreloaderShown(true);
       // debugger;
       return;
     }
@@ -58,7 +61,7 @@ function Movies(props) {
 
       this.lastCallTimer = setTimeout(() => {
         calculateCardsQuantity();
-        console.log(renderSize, filteredMovies.length, (renderSize >= filteredMovies.length))
+        console.log(renderSize, filteredMovies.length, renderSize >= filteredMovies.length);
       }, 200);
     }
 
@@ -130,7 +133,7 @@ function Movies(props) {
       <Header isLoggedIn={props.isLoggedIn} openPopup={props.openPopup} />
       <main className="movies">
         <Search formData={searchFormData} disabled={searchError !== ''} getFilms={getBeatFilms} />
-        <Cards error={searchError} errorFunction={showError} cards={resultMoviesArray} spanHidden={spanHidden} isSavedPage={false} />
+        <Cards error={searchError} savedIDs={savedMoviesIDs} errorFunction={showError} dislikeCard={props.dislikeCard} likeCard={props.likeCard} cards={resultMoviesArray} spanHidden={spanHidden} isSavedPage={false} />
         <Preloader loadCards={loadMore} hasMovies={filteredMovies.length !== 0} isLoading={isLoading} isShown={isPreloaderShown && !(renderSize >= filteredMovies.length)} />
       </main>
       <Footer />

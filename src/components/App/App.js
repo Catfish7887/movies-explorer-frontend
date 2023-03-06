@@ -8,13 +8,14 @@ import Profile from '../Profile/Profile';
 import Register from '../Authorization/Register';
 import Login from '../Authorization/Login';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
-import NavPopup from '../NavPopup/NavPopup';
+import NavPopup from '../Popups/NavPopup';
 import { useEffect, useState } from 'react';
 import mainApi from '../../utils/Api/MainApi';
 import CurrentUserContext from '../../contexts/currentUserContext';
 import isLoggedInContext from '../../contexts/isLoggedInContext';
 import moviesApi from '../../utils/Api/MoviesApi';
 import savedMoviesContext from '../../contexts/savedMovies';
+import ErrorPopup from '../Popups/ErrorPopup';
 
 function App() {
   const [isNavPopupOpened, setIsNavPopupOpened] = useState(false);
@@ -24,9 +25,6 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
-  // Проверка наличия токена при запуске приложения/обновлении страницы
-  // Если есть токен - токен присоеднияется к заголовкам запроса, далее меняется стейт isLoggedIn,
-  // срабатывает useEffect, который зависит от этой переменной, вызывается метод API, который использует токен и возвращает
   useEffect(() => {
     checkToken();
   }, []);
@@ -39,12 +37,16 @@ function App() {
       Promise.all([getMainFilms, getFavoriteMovies, getUserData])
         .then(([movies, favoriteMovies, userData]) => {
           setCurrentUser(userData);
-          setLikedMovies(favoriteMovies.filter((data)=>{
-            return data.owner === userData._id
-          }));
+          setLikedMovies(
+            favoriteMovies.filter((data) => {
+              return data.owner === userData._id;
+            })
+          );
           setMovies(movies);
         })
         .catch((err) => {
+          setIsLoggedIn(false);
+          navigate('/');
           console.log(err);
         });
     }
@@ -64,7 +66,8 @@ function App() {
       })
       .then(() => mainApi.injectToken())
       .catch((err) => {
-        if (err.message === 'Статус ошибки: 401') {
+        if (err.status === 401) {
+          localStorage.removeItem('jwt');
           navigate('/signin');
         } else {
           console.log(err);
@@ -72,7 +75,7 @@ function App() {
       });
   }
 
-  function signIn(data) {
+  function signIn(data, onError) {
     mainApi
       .signin(data)
       .then((res) => {
@@ -80,15 +83,35 @@ function App() {
         setIsLoggedIn(true);
       })
       .then(() => mainApi.injectToken())
-      .then(() => navigate('/'))
-      .catch((err) => console.log(err));
+      .then(() => navigate('/movies'))
+      .catch((err) => {
+        if(err.status === 401){
+          showApiError(onError, 'Неправильный логин или пароль')
+        }else if(err.status === 400){
+          showApiError(onError, 'Введены некорректные данные')
+        }else{
+          showApiError(onError, 'На сервере произошла неизвестная ошибка. Повторите попытку позже')
+        }
+      });
   }
 
-  function createUser(data) {
+  function createUser(data, onError) {
     mainApi
       .createUser(data)
-      .then(() => navigate('/signin'))
-      .catch((err) => console.log(err));
+      .then(() => {
+        setIsLoggedIn(true);
+        navigate('/movies');
+      })
+      .catch((err) => {
+        if(err.status === 409){
+          showApiError(onError, 'Пользователь с таким E-mail уже зарегистрирован')
+        }else if(err.status === 400){
+          showApiError(onError, 'Введены некорректные данные')
+        }else{
+          showApiError(onError, 'На сервере произошла неизвестная ошибка. Повторите попытку позже')
+        }
+        console.log(err);
+      });
   }
 
   function editUser(data, doSomethingOnError) {
@@ -119,7 +142,7 @@ function App() {
     mainApi
       .dislikeCard(id)
       .then((removedCard) => {
-        setLikedMovies(likedMovies.filter(card => card.movieId !== removedCard.movieId ));
+        setLikedMovies(likedMovies.filter((card) => card.movieId !== removedCard.movieId));
       })
       .catch((err) => console.log(err));
   }
@@ -138,7 +161,13 @@ function App() {
     navigate('/');
   }
 
-  console.log();
+  function showApiError(onError, message) {
+    onError(message)
+
+    return setTimeout(()=>{
+      onError('')
+    }, 3000)
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -155,6 +184,7 @@ function App() {
             <Route path="/signup" element={<AuthRoute isLoggedIn={isLoggedIn} component={<Register onSubmit={createUser} />} />} />
           </Routes>
           <NavPopup onClose={closeAllPopups} isOpened={isNavPopupOpened} />
+          <ErrorPopup isOpened={true}/>
         </savedMoviesContext.Provider>
       </isLoggedInContext.Provider>
     </CurrentUserContext.Provider>

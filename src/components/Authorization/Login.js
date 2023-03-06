@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 function Login(props) {
+  const [apiError, setApiError] = useState('')
+
   const {
     register,
     formState: { errors, isValid },
@@ -11,7 +14,7 @@ function Login(props) {
   });
 
   function login(data) {
-    props.onSubmit(data);
+    props.onSubmit(data, setApiError);
   }
 
   return (
@@ -60,8 +63,8 @@ function Login(props) {
             />
             <span className={errors.password ? 'authorization__form-error' : 'authorization__form-error_hidden'}>{errors.password?.message || 'что-то не так'}</span>
           </label>
-
-          <button disabled={!isValid} className={isValid && Object.keys(errors).length === 0 ? 'authorization__form-submit authorization__form-submit_page_login authorization__form-submit_enabled' : 'authorization__form-submit authorization__form-submit_page_login authorization__form-submit_disabled'} type="submit">
+          <span className='authorization__form-error authrorization__api-error'>{apiError}</span>
+          <button disabled={!isValid || apiError !== ''} className={(isValid && apiError ==='' && Object.keys(errors).length === 0) ? 'authorization__form-submit authorization__form-submit_page_login authorization__form-submit_enabled' : 'authorization__form-submit authorization__form-submit_page_login authorization__form-submit_disabled'} type="submit">
             Войти
           </button>
         </form>

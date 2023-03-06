@@ -1,8 +1,8 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import savedMoviesContext from '../../contexts/savedMovies';
 import { moviesApiConfig } from '../../utils/ApiConfig';
 function Card(props) {
-  const { data, likeCard, dislikeCard, savedIDs } = props;
+  const { data, likeCard, dislikeCard } = props;
   const isSavedPage = window.location.pathname === '/saved-movies';
 
   const { country, director, duration, year, description, trailerLink, nameRU, nameEN } = data;
@@ -14,8 +14,6 @@ function Card(props) {
 
   const isLiked = savedMovies.some(m => m.movieId === movieId)
 
-  // const isSavedPage = props.isSavedPage;
-
   function getTimeFromMins(mins) {
     let hours = Math.trunc(mins/60);
 	let minutes = mins % 60;
@@ -26,9 +24,7 @@ function Card(props) {
 };
 
   function handleLikeClick() {
-    // debugger
     isLiked ? dislikeCard(movieId) : likeCard({country, director, duration, year, description, trailerLink, image, thumbnail, movieId, nameRU, nameEN});
-    // console.log(JSON.stringify({country, director, duration, year, description, trailerLink, image, thumbnail, movieId, nameRU, nameEN}))
     return
   }
 

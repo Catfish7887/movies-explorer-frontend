@@ -5,21 +5,17 @@ import Preloader from '../Preloader/Preloader';
 import Search from '../Search/Search';
 import moviesApi from '../../utils/Api/MoviesApi';
 
-import { useContext, useEffect, useState } from 'react';
-import findFilms from '../../utils/functions/search';
-import savedMoviesContext from '../../contexts/savedMovies';
+import { useEffect, useState } from 'react';
+import findFilms from '../../utils/functions/findFilms';
 
 function Movies(props) {
   const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [renderSize, setRenderSize] = useState(12);
-  const [spanHidden, setSpanHidden] = useState(false);
   const [searchError, setSearchError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isPreloaderShown, setIsPreloaderShown] = useState(false);
   const [searchFormData, setSearchFormData] = useState({});
-  const savedMovies = useContext(savedMoviesContext)
-  const [savedMoviesIDs, setSavedMoviesIDs] = useState([]);
 
   const resultMoviesArray = filteredMovies.slice(0, renderSize);
 
@@ -27,14 +23,11 @@ function Movies(props) {
     calculateCardsQuantity();
     const movies = localStorage.getItem('foundMovies');
     const data = localStorage.getItem('searchFormData');
-    // debugger;
 
     if (data && movies) {
-      setSpanHidden(true);
       setFilteredMovies(JSON.parse(movies));
       setSearchFormData(JSON.parse(data));
       setIsPreloaderShown(true);
-      // debugger;
       return;
     }
 
@@ -72,27 +65,22 @@ function Movies(props) {
   const calculateCardsQuantity = () => {
     if (window.innerWidth < 777) {
       setRenderSize(5);
-      // console.log('5 карточек')
     } else if (window.innerWidth < 1279) {
       setRenderSize(8);
-      // console.log(renderSize)
     } else if (window.innerWidth > 1279) {
       setRenderSize(12);
-      // console.log(renderSize)
     }
     return;
   };
 
   function getBeatFilms(input, checkbox) {
     if (input === '') {
-      setSpanHidden(true);
       showError('Поле запроса не может быть пустым');
       return;
     }
 
     const formData = { text: input, checkbox: checkbox };
     setFilteredMovies([]);
-    setSpanHidden(true);
     setIsLoading(true);
     setIsPreloaderShown(true);
 
@@ -110,7 +98,6 @@ function Movies(props) {
   function loadMore() {
     if (window.innerWidth < 1279) {
       setRenderSize(renderSize + 2);
-      // console.log(renderSize, resultMoviesArray)
     } else if (window.innerWidth > 1279) {
       setRenderSize(renderSize + 3);
     }
@@ -119,11 +106,11 @@ function Movies(props) {
   }
 
   function showError(message) {
+    setFilteredMovies([])
     setSearchError(message);
     setIsPreloaderShown(false);
 
     return setTimeout(() => {
-      setSpanHidden(false);
       setSearchError('');
     }, 2000);
   }
@@ -133,7 +120,7 @@ function Movies(props) {
       <Header isLoggedIn={props.isLoggedIn} openPopup={props.openPopup} />
       <main className="movies">
         <Search formData={searchFormData} disabled={searchError !== ''} getFilms={getBeatFilms} />
-        <Cards error={searchError} savedIDs={savedMoviesIDs} errorFunction={showError} dislikeCard={props.dislikeCard} likeCard={props.likeCard} cards={resultMoviesArray} spanHidden={spanHidden} isSavedPage={false} />
+        <Cards spanPhrase={'Введите ключевое слово для поиска'} error={searchError} errorFunction={showError} dislikeCard={props.dislikeCard} likeCard={props.likeCard} cards={resultMoviesArray} spanHidden={resultMoviesArray.length !== 0 || searchError !== ''} isSavedPage={false} />
         <Preloader loadCards={loadMore} hasMovies={filteredMovies.length !== 0} isLoading={isLoading} isShown={isPreloaderShown && !(renderSize >= filteredMovies.length)} />
       </main>
       <Footer />

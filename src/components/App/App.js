@@ -20,7 +20,7 @@ function App() {
   const [isNavPopupOpened, setIsNavPopupOpened] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [movies, setMovies] = useState([]);
-  const [likedCards, setLikedCards] = useState([]);
+  const [likedMovies, setLikedMovies] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
@@ -39,7 +39,9 @@ function App() {
       Promise.all([getMainFilms, getFavoriteMovies, getUserData])
         .then(([movies, favoriteMovies, userData]) => {
           setCurrentUser(userData);
-          setLikedCards(favoriteMovies);
+          setLikedMovies(favoriteMovies.filter((data)=>{
+            return data.owner === userData._id
+          }));
           setMovies(movies);
         })
         .catch((err) => {
@@ -106,7 +108,7 @@ function App() {
     mainApi
       .likeCard({ country, director, duration, year, description, image, trailerLink, thumbnail, owner, movieId, nameRU, nameEN })
       .then((card) => {
-        setLikedCards([...likedCards, card]);
+        setLikedMovies([...likedMovies, card]);
       })
       .catch((err) => {
         console.log(err);
@@ -117,7 +119,7 @@ function App() {
     mainApi
       .dislikeCard(id)
       .then((removedCard) => {
-        setLikedCards(likedCards.filter(card => card.movieId !== removedCard.movieId ));
+        setLikedMovies(likedMovies.filter(card => card.movieId !== removedCard.movieId ));
       })
       .catch((err) => console.log(err));
   }
@@ -141,14 +143,14 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <isLoggedInContext.Provider value={isLoggedIn}>
-        <savedMoviesContext.Provider value={likedCards}>
+        <savedMoviesContext.Provider value={likedMovies}>
           <Routes>
             <Route path="/*" element={<NotFoundPage />} />
             <Route path="/" element={<Main openPopup={openNavPopup} />} />
 
             <Route path="/profile" element={<ProtectedRoute isLoggedIn={isLoggedIn} component={<Profile onLogout={handleLogout} onSubmit={editUser} openPopup={openNavPopup} />} />} />
             <Route path="/movies" element={<ProtectedRoute isLoggedIn={isLoggedIn} component={<Movies movies={movies} likeCard={likeCard} dislikeCard={dislikeCard} getMovies={getBeatFilms} isLoggedIn={isLoggedIn} openPopup={openNavPopup} />} />} />
-            <Route path="/saved-movies" element={<ProtectedRoute isLoggedIn={isLoggedIn} component={<SavedMovies savedMovies={likedCards} isLoggedIn={isLoggedIn} openPopup={openNavPopup} />} />} />
+            <Route path="/saved-movies" element={<ProtectedRoute isLoggedIn={isLoggedIn} component={<SavedMovies movies={likedMovies} dislikeCard={dislikeCard} isLoggedIn={isLoggedIn} openPopup={openNavPopup} />} />} />
             <Route path="/signin" element={<AuthRoute isLoggedIn={isLoggedIn} component={<Login onSubmit={signIn} />} />} />
             <Route path="/signup" element={<AuthRoute isLoggedIn={isLoggedIn} component={<Register onSubmit={createUser} />} />} />
           </Routes>

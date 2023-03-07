@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import CurrentUserContext from '../../contexts/currentUserContext';
 import Header from '../Header/Header';
 import { useForm } from 'react-hook-form';
@@ -58,10 +58,10 @@ function Profile(props) {
                     value: 2,
                     message: 'должно быть минимум 2 символа',
                   },
-                  // pattern: {
-                  //   value: '',
-                  //   message: ''
-                  // }
+                  pattern: {
+                    value: /^[А-Яёа-яёA-Za-z][а-яёА-ЯёA-Za-z \s '-]+/,
+                    message: 'Имя может состоять только из латинских, русских букв, дефиса и пробела',
+                  }
                 })}
               />
             </li>

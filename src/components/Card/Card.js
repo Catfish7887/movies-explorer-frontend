@@ -29,7 +29,7 @@ function Card(props) {
   }
 
   function deleteCard(){
-    dislikeCard(data.movieId)
+    dislikeCard(data._id)
   }
 
   return (

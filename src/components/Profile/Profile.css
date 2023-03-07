@@ -121,6 +121,12 @@
 .profile__button_red-text {
   color: #ee3465;
   margin-top: 16px;
+  cursor: pointer;
+}
+
+.profile__button_red-text:hover{
+  opacity: 0.8;
+
 }
 
 .profile__error-span {
@@ -165,10 +171,6 @@
     margin-top: 161px;
   }
 
-  .profile__error-span{
-    /* margin-top: 131px; */
-  }
-
   .profile__submit-btn_disabled{
     margin-top: 35px;
   }
@@ -196,10 +198,6 @@
     line-height: 15px;
     padding: 15px 98px;
     margin-top: 311px;
-  }
-
-  .profile__error-span{
-    /* margin-top: 315px; */
   }
 
   .profile__submit-btn_disabled{

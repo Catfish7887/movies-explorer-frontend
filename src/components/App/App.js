@@ -23,6 +23,7 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [likedMovies, setLikedMovies] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [apiErrorMessage, setApiErrorMessage] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -45,9 +46,11 @@ function App() {
           setMovies(movies);
         })
         .catch((err) => {
+          localStorage.removeItem('foundMovies');
+          localStorage.removeItem('searchFormData');
           setIsLoggedIn(false);
           navigate('/');
-          console.log(err);
+          setApiErrorMessage('На сервере произошла ошибка');
         });
     }
     return;
@@ -67,15 +70,19 @@ function App() {
       .then(() => mainApi.injectToken())
       .catch((err) => {
         if (err.status === 401) {
+          localStorage.removeItem('foundMovies');
+          localStorage.removeItem('searchFormData');
           localStorage.removeItem('jwt');
           navigate('/signin');
+          setApiErrorMessage('С токеном что-то не так. Возможно, истёк срок его действия');
         } else {
-          console.log(err);
+          setApiErrorMessage('На сервере произошла ошибка');
         }
       });
   }
 
-  function signIn(data, onError) {
+  function signIn(data, fetchPendingState, onError) {
+    fetchPendingState(true);
     mainApi
       .signin(data)
       .then((res) => {
@@ -85,32 +92,46 @@ function App() {
       .then(() => mainApi.injectToken())
       .then(() => navigate('/movies'))
       .catch((err) => {
-        if(err.status === 401){
-          showApiError(onError, 'Неправильный логин или пароль')
-        }else if(err.status === 400){
-          showApiError(onError, 'Введены некорректные данные')
-        }else{
-          showApiError(onError, 'На сервере произошла неизвестная ошибка. Повторите попытку позже')
+        if (err.status === 401) {
+          showApiError(onError, 'Неправильный логин или пароль');
+        } else if (err.status === 400) {
+          showApiError(onError, 'Введены некорректные данные');
+        } else {
+          showApiError(onError, 'На сервере произошла неизвестная ошибка. Повторите попытку позже');
         }
+      })
+      .finally(() => {
+        fetchPendingState(false);
       });
   }
 
-  function createUser(data, onError) {
+  function createUser(data, fetchPendingState, onError) {
+    const { email, password } = data;
+    fetchPendingState(true);
     mainApi
       .createUser(data)
+      .then(() => mainApi.signin({ email, password }))
+      .then((res) => {
+        localStorage.setItem('jwt', res.token);
+        mainApi.checkToken(res.token);
+      })
       .then(() => {
+        mainApi.injectToken();
         setIsLoggedIn(true);
         navigate('/movies');
       })
       .catch((err) => {
-        if(err.status === 409){
-          showApiError(onError, 'Пользователь с таким E-mail уже зарегистрирован')
-        }else if(err.status === 400){
-          showApiError(onError, 'Введены некорректные данные')
-        }else{
-          showApiError(onError, 'На сервере произошла неизвестная ошибка. Повторите попытку позже')
+        if (err.status === 409) {
+          showApiError(onError, 'Пользователь с таким E-mail уже зарегистрирован');
+        } else if (err.status === 400) {
+          showApiError(onError, 'Введены некорректные данные');
+        } else {
+          showApiError(onError, 'На сервере произошла неизвестная ошибка. Повторите попытку позже');
         }
         console.log(err);
+      })
+      .finally(() => {
+        fetchPendingState(false);
       });
   }
 
@@ -123,10 +144,6 @@ function App() {
       .catch((err) => doSomethingOnError(err));
   }
 
-  function getBeatFilms() {
-    moviesApi.getFilms().then((res) => setMovies(res));
-  }
-
   function likeCard({ country, director, duration, year, description, image, trailerLink, thumbnail, owner, movieId, nameRU, nameEN }) {
     mainApi
       .likeCard({ country, director, duration, year, description, image, trailerLink, thumbnail, owner, movieId, nameRU, nameEN })
@@ -134,7 +151,7 @@ function App() {
         setLikedMovies([...likedMovies, card]);
       })
       .catch((err) => {
-        console.log(err);
+        setApiErrorMessage('На сервере произошла ошибка');
       });
   }
 
@@ -144,7 +161,7 @@ function App() {
       .then((removedCard) => {
         setLikedMovies(likedMovies.filter((card) => card.movieId !== removedCard.movieId));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => setApiErrorMessage('На сервере произошла ошибка'));
   }
 
   function openNavPopup() {
@@ -153,20 +170,43 @@ function App() {
 
   function closeAllPopups() {
     setIsNavPopupOpened(false);
+    setApiErrorMessage('');
   }
 
   function handleLogout() {
+    localStorage.removeItem('foundMovies');
+    localStorage.removeItem('searchFormData');
     localStorage.removeItem('jwt');
     setIsLoggedIn(false);
     navigate('/');
   }
 
-  function showApiError(onError, message) {
-    onError(message)
+  const binarySearchAndDelete = (cardId, left, right) => {
+    const mid = Math.floor((left + right) / 2);
+    if (cardId === likedMovies[mid].movieId) {
+      return dislikeCard(likedMovies[mid]._id);
+    } else if (right - 1 === left) {
+      return cardId === likedMovies[left].movieId ? dislikeCard(likedMovies[left]._id) : dislikeCard(likedMovies[right]._id);
+    }
+    if (cardId !== likedMovies[mid].movieId) {
+      return binarySearchAndDelete(cardId, left, right);
+    } else {
+      return binarySearchAndDelete(cardId, mid + 1, right);
+    }
+  };
 
-    return setTimeout(()=>{
-      onError('')
-    }, 3000)
+  function findAndDeleteCard(cardId) {
+    const left = 0;
+    const right = likedMovies.length - 1;
+    binarySearchAndDelete(cardId, left, right);
+  }
+
+  function showApiError(onError, message) {
+    onError(message);
+
+    return setTimeout(() => {
+      onError('');
+    }, 3000);
   }
 
   return (
@@ -178,13 +218,13 @@ function App() {
             <Route path="/" element={<Main openPopup={openNavPopup} />} />
 
             <Route path="/profile" element={<ProtectedRoute isLoggedIn={isLoggedIn} component={<Profile onLogout={handleLogout} onSubmit={editUser} openPopup={openNavPopup} />} />} />
-            <Route path="/movies" element={<ProtectedRoute isLoggedIn={isLoggedIn} component={<Movies movies={movies} likeCard={likeCard} dislikeCard={dislikeCard} getMovies={getBeatFilms} isLoggedIn={isLoggedIn} openPopup={openNavPopup} />} />} />
-            <Route path="/saved-movies" element={<ProtectedRoute isLoggedIn={isLoggedIn} component={<SavedMovies movies={likedMovies} dislikeCard={dislikeCard} isLoggedIn={isLoggedIn} openPopup={openNavPopup} />} />} />
+            <Route path="/movies" element={<ProtectedRoute isLoggedIn={isLoggedIn} component={<Movies movies={movies} likeCard={likeCard} dislikeCard={findAndDeleteCard} isLoggedIn={isLoggedIn} openPopup={openNavPopup} />} />} />
+            <Route path="/saved-movies" element={<ProtectedRoute isLoggedIn={isLoggedIn} component={<SavedMovies dislikeCard={dislikeCard} isLoggedIn={isLoggedIn} openPopup={openNavPopup} />} />} />
             <Route path="/signin" element={<AuthRoute isLoggedIn={isLoggedIn} component={<Login onSubmit={signIn} />} />} />
             <Route path="/signup" element={<AuthRoute isLoggedIn={isLoggedIn} component={<Register onSubmit={createUser} />} />} />
           </Routes>
           <NavPopup onClose={closeAllPopups} isOpened={isNavPopupOpened} />
-          <ErrorPopup isOpened={true}/>
+          <ErrorPopup onClose={closeAllPopups} message={apiErrorMessage} />
         </savedMoviesContext.Provider>
       </isLoggedInContext.Provider>
     </CurrentUserContext.Provider>

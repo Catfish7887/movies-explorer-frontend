@@ -6,16 +6,21 @@ import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import Search from '../Search/Search';
 function SavedMovies(props) {
-  const [spanHidden, setSpanHidden] = useState(false);
+  const savedMovies = useContext(savedMoviesContext)
+
   const [searchError, setSearchError] = useState('');
   const [searchFormData, setSearchFormData] = useState({});
-  const [resultMoviesArray, setResultMoviesArray] = useState(props.movies);
+  const [resultMoviesArray, setResultMoviesArray] = useState(savedMovies);
+
+  useEffect(()=>{
+    setResultMoviesArray(savedMovies)
+  },[savedMovies])
 
   function showError(message) {
     setSearchError(message);
     setResultMoviesArray([]);
     return setTimeout(() => {
-      setResultMoviesArray(props.movies)
+      setResultMoviesArray(savedMovies)
       setSearchError('');
     }, 2000);
   }
@@ -26,12 +31,12 @@ function SavedMovies(props) {
       return;
     }
 
-    findFilms(props.movies, text, checkbox)
+    findFilms(savedMovies, text, checkbox)
       .then((movies) => setResultMoviesArray(movies))
       .catch((msg) => {
         setResultMoviesArray([])
         showError(msg);
-
+        
       });
   }
 
@@ -40,7 +45,7 @@ function SavedMovies(props) {
       <Header isLoggedIn={props.isLoggedIn} openPopup={props.openPopup} />
       <main className="saved-movies">
         <Search formData={searchFormData} disabled={searchError !== ''} getFilms={findMovies} />
-        <Cards spanPhrase={'Сохранённых фильмов пока что нет'} error={searchError} dislikeCard={props.dislikeCard} likeCard={props.likeCard} errorFunction={showError} cards={(resultMoviesArray.length === 0 && searchError === '') ? props.movies : resultMoviesArray} spanHidden={props.movies.length !== 0} isSavedPage={true} />
+        <Cards spanPhrase={'Сохранённых фильмов пока что нет'} error={searchError} dislikeCard={props.dislikeCard} likeCard={props.likeCard} errorFunction={showError} cards={(resultMoviesArray.length === 0 && searchError === '') ? savedMovies : resultMoviesArray} spanHidden={savedMovies.length !== 0 || searchError !== ''} isSavedPage={true} />
       </main>
       <Footer />
     </>

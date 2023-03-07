@@ -26,14 +26,3 @@ function filter(arr, text, checkbox) {
 }
 
 export default findFilms;
-
-// return new Promise((res, rej)=>{
-//   if( el.nameRU.toLowerCase().includes(text.toLowerCase()) || el.nameEN.toLowerCase().includes(text.toLowerCase()) ){
-//     res(el)
-//   }
-
-//   if( checkbox && el.duration <= 40 && (el.nameRU.toLowerCase().includes(text.toLowerCase()) || el.nameEN.toLowerCase().includes(text.toLowerCase())) ){
-//     res(el)
-//   }
-
-//   rej(new Error('Ничего не найдено'))

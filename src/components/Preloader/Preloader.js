@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 const Preloader = (props) => {
   const {isShown, isLoading, hasMovies} = props;
 

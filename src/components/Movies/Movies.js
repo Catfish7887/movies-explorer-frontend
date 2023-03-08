@@ -7,6 +7,7 @@ import moviesApi from '../../utils/Api/MoviesApi';
 
 import { useEffect, useState } from 'react';
 import findFilms from '../../utils/functions/findFilms';
+import { cardsMultiplier, cardsQuantity } from '../../utils/constants';
 
 function Movies(props) {
   const [movies, setMovies] = useState([]);
@@ -18,7 +19,6 @@ function Movies(props) {
   const [searchFormData, setSearchFormData] = useState({});
 
   const resultMoviesArray = filteredMovies.slice(0, renderSize);
-
   useEffect(() => {
     calculateCardsQuantity();
     const movies = localStorage.getItem('foundMovies');
@@ -54,7 +54,6 @@ function Movies(props) {
 
       this.lastCallTimer = setTimeout(() => {
         calculateCardsQuantity();
-        console.log(renderSize, filteredMovies.length, renderSize >= filteredMovies.length);
       }, 200);
     }
 
@@ -63,12 +62,12 @@ function Movies(props) {
   }, []);
 
   const calculateCardsQuantity = () => {
-    if (window.innerWidth < 777) {
-      setRenderSize(5);
-    } else if (window.innerWidth < 1279) {
-      setRenderSize(8);
-    } else if (window.innerWidth > 1279) {
-      setRenderSize(12);
+    if (window.innerWidth < cardsQuantity.mobile.width) {
+      setRenderSize(cardsQuantity.mobile.amount);
+    } else if (window.innerWidth < cardsQuantity.desktop.width) {
+      setRenderSize(cardsQuantity.tablet.amount);
+    } else if (window.innerWidth > cardsQuantity.desktop.width) {
+      setRenderSize(cardsQuantity.desktop.amount);
     }
     return;
   };
@@ -96,10 +95,10 @@ function Movies(props) {
   }
 
   function loadMore() {
-    if (window.innerWidth < 1279) {
-      setRenderSize(renderSize + 2);
-    } else if (window.innerWidth > 1279) {
-      setRenderSize(renderSize + 3);
+    if (window.innerWidth < cardsQuantity.desktop.width) {
+      setRenderSize(renderSize + cardsMultiplier.portable);
+    } else if (window.innerWidth > cardsQuantity.desktop.width) {
+      setRenderSize(renderSize + cardsMultiplier.desktop);
     }
     console.log();
     return;

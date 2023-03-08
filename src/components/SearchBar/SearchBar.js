@@ -7,7 +7,6 @@ function SearchBar(props) {
   const checkbox = useRef(null);
   function findFilms(e){
     e.preventDefault()
-    console.log(props.disabled)
     // props.onSubmit(inputText.current.value, checkbox.current.checked)
     props.onSubmit(inputText.current.value, checkbox.current.checked)
   };

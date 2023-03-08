@@ -1,19 +1,24 @@
+import { shortMovieDuration } from "../constants";
+import { errorMessages } from "../errorMessages";
+
 function findFilms(arr, text, checkbox) {
   return new Promise((res, rej) => {
     const filteredArray = filter(arr, text, checkbox);
 
     if (filteredArray.length === 0) {
-      rej('По Вашему запросу ничего не найдено');
+      rej(errorMessages.notFound);
     }
 
     res(filteredArray);
   });
 }
 
+
+
 function filter(arr, text, checkbox) {
   return arr.filter((el) => {
     if (checkbox) {
-      if(el.duration <= 40 && (el.nameRU.toLowerCase().includes(text.toLowerCase()) || el.nameEN.toLowerCase().includes(text.toLowerCase()))){
+      if(el.duration <= shortMovieDuration && (el.nameRU.toLowerCase().includes(text.toLowerCase()) || el.nameEN.toLowerCase().includes(text.toLowerCase()))){
         return el
       }
 

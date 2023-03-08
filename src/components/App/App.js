@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import Main from '../Main/Main';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import AuthRoute from '../AuthRoute/AuthRoute';
@@ -16,6 +16,7 @@ import isLoggedInContext from '../../contexts/isLoggedInContext';
 import moviesApi from '../../utils/Api/MoviesApi';
 import savedMoviesContext from '../../contexts/savedMovies';
 import ErrorPopup from '../Popups/ErrorPopup';
+import { errorMessages } from '../../utils/errorMessages';
 
 function App() {
   const [isNavPopupOpened, setIsNavPopupOpened] = useState(false);
@@ -25,7 +26,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [apiErrorMessage, setApiErrorMessage] = useState('');
   const navigate = useNavigate();
-
+ const location = useLocation()
   useEffect(() => {
     checkToken();
   }, []);
@@ -50,7 +51,7 @@ function App() {
           localStorage.removeItem('searchFormData');
           setIsLoggedIn(false);
           navigate('/');
-          setApiErrorMessage('На сервере произошла ошибка');
+          setApiErrorMessage(errorMessages.internal);
         });
     }
     return;
@@ -66,6 +67,7 @@ function App() {
       .then((res) => {
         setIsLoggedIn(true);
         setCurrentUser(res);
+        navigate(location.pathname, {replace: true})
       })
       .then(() => mainApi.injectToken())
       .catch((err) => {
@@ -74,9 +76,9 @@ function App() {
           localStorage.removeItem('searchFormData');
           localStorage.removeItem('jwt');
           navigate('/signin');
-          setApiErrorMessage('С токеном что-то не так. Возможно, истёк срок его действия');
+          setApiErrorMessage(errorMessages.token);
         } else {
-          setApiErrorMessage('На сервере произошла ошибка');
+          setApiErrorMessage(errorMessages.internal);
         }
       });
   }
@@ -93,11 +95,11 @@ function App() {
       .then(() => navigate('/movies'))
       .catch((err) => {
         if (err.status === 401) {
-          showApiError(onError, 'Неправильный логин или пароль');
+          showApiError(onError, errorMessages.unauthorized);
         } else if (err.status === 400) {
-          showApiError(onError, 'Введены некорректные данные');
+          showApiError(onError, errorMessages.badRequest);
         } else {
-          showApiError(onError, 'На сервере произошла неизвестная ошибка. Повторите попытку позже');
+          showApiError(onError, errorMessages.internal);
         }
       })
       .finally(() => {
@@ -122,11 +124,11 @@ function App() {
       })
       .catch((err) => {
         if (err.status === 409) {
-          showApiError(onError, 'Пользователь с таким E-mail уже зарегистрирован');
+          showApiError(onError, errorMessages.conflict);
         } else if (err.status === 400) {
-          showApiError(onError, 'Введены некорректные данные');
+          showApiError(onError, errorMessages.badRequest);
         } else {
-          showApiError(onError, 'На сервере произошла неизвестная ошибка. Повторите попытку позже');
+          showApiError(onError, errorMessages.internal);
         }
         console.log(err);
       })
@@ -151,7 +153,7 @@ function App() {
         setLikedMovies([...likedMovies, card]);
       })
       .catch((err) => {
-        setApiErrorMessage('На сервере произошла ошибка');
+        setApiErrorMessage(errorMessages.internal);
       });
   }
 
@@ -161,7 +163,7 @@ function App() {
       .then((removedCard) => {
         setLikedMovies(likedMovies.filter((card) => card.movieId !== removedCard.movieId));
       })
-      .catch((err) => setApiErrorMessage('На сервере произошла ошибка'));
+      .catch((err) => setApiErrorMessage(errorMessages.internal));
   }
 
   function openNavPopup() {
@@ -181,24 +183,24 @@ function App() {
     navigate('/');
   }
 
-  const binarySearchAndDelete = (cardId, left, right) => {
-    const mid = Math.floor((left + right) / 2);
-    if (cardId === likedMovies[mid].movieId) {
-      return dislikeCard(likedMovies[mid]._id);
-    } else if (right - 1 === left) {
-      return cardId === likedMovies[left].movieId ? dislikeCard(likedMovies[left]._id) : dislikeCard(likedMovies[right]._id);
-    }
-    if (cardId !== likedMovies[mid].movieId) {
-      return binarySearchAndDelete(cardId, left, right);
-    } else {
-      return binarySearchAndDelete(cardId, mid + 1, right);
-    }
-  };
+  // Во время рефакторинга после сдачи работы, доработаю алгоритм. Пока что использую обычный метод array.find()
+  // const binarySearchAndDelete = (cardId, left, right) => {
+  //   const mid = Math.floor((left + right) / 2);
+  //   if (cardId === likedMovies[mid].movieId) {
+  //     return dislikeCard(likedMovies[mid]._id);
+  //   } else if (right - 1 === left) {
+  //     return cardId === likedMovies[left].movieId ? dislikeCard(likedMovies[left]._id) : dislikeCard(likedMovies[right]._id);
+  //   }
+  //   if (cardId !== likedMovies[mid].movieId) {
+  //     return binarySearchAndDelete(cardId, mid + 1, right);
+  //   } else {
+  //     return binarySearchAndDelete(cardId, left, right);
+  //   }
+  // };
 
   function findAndDeleteCard(cardId) {
-    const left = 0;
-    const right = likedMovies.length - 1;
-    binarySearchAndDelete(cardId, left, right);
+    const card = likedMovies.find((movie) => movie.movieId === cardId)
+    dislikeCard(card._id)
   }
 
   function showApiError(onError, message) {

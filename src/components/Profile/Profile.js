@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 function Profile(props) {
   const currentUser = useContext(CurrentUserContext);
   const [errMessage, setErrMessage] = useState('');
+  const [isReqSuccess, setIsReqSuccess] = useState(false)
 
   const {
     register,
@@ -17,6 +18,20 @@ function Profile(props) {
     defaultValues: currentUser,
   });
 
+  useState(() => {
+    reset({
+      keepDefaultValues: true
+    })
+  }, [errMessage])
+
+  function showReqSuccessMessage() {
+    setIsReqSuccess(true);
+
+    return setTimeout(() => {
+      setIsReqSuccess(false)
+    }, 2000)
+  }
+
   function showFormError(err) {
     setErrMessage(err);
 
@@ -26,7 +41,7 @@ function Profile(props) {
   }
 
   function editProfile(data) {
-    props.onSubmit(data, showFormError);
+    props.onSubmit(data, showFormError, showReqSuccessMessage);
     if (errMessage === ''){
       reset({
       }, {keepDefaultValues: false})
@@ -91,11 +106,13 @@ function Profile(props) {
               />
             </li>
           </ul>
+          {isReqSuccess ? <span className=" profile__ error-span profile__req-message">Данные профиля успешно изменены</span> : <></>}
           {!isValid || errMessage !== '' ? (
             <div className="profile__form-errors">
               {errors.name ? <span className={`profile__error-span ${!isValid ? `profile__error-span_shown` : ``}`}>{errors.name?.message ? `В поле имя: ${errors.name.message}` : 'Произошла неизвестная ошибка'}</span> : <></>}
               {errors.email ? <span className={`profile__error-span ${!isValid ? `profile__error-span_shown` : ``}`}>{errors.email?.message ? `В поле электронной почты: ${errors.email.message}` : 'Произошла неизвестная ошибка'}</span> : <></>}
               {errMessage !== '' ? <span className="profile__error-span profile__error-span_shown">{errMessage === 'Failed to fetch' ? `При обновлении профиля произошла ошибка. Проверьте Ваше интернет-соединение` : errMessage}</span> : <></>}
+              {isReqSuccess ? <span className=" profile__ error-span profile__req-message">Данные профиля успешно изменены</span> : <></>}
             </div>
           ) : (
             <></>

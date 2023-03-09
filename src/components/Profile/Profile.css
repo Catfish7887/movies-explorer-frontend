@@ -151,6 +151,10 @@
   gap: 15px;
 }
 
+.profile__req-message{
+  color: #3ddc84;
+}
+
 @media screen and (max-width: 1279px) {
   .profile {
     padding: 228px 179px 70px;

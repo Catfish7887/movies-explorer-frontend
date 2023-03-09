@@ -137,12 +137,12 @@ function App() {
       });
   }
 
-  function editUser(data, doSomethingOnError) {
+  function editUser(data, doSomethingOnError, onReqSuccess) {
     mainApi
       .updateUser(data)
       .then((res) => {
         setCurrentUser(res);
-        console.log(`Текущие данные пользователя:${currentUser}`);
+        onReqSuccess();
       })
       .catch((err) => {
         if(err.status === 409){

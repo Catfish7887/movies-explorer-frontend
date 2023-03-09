@@ -26,7 +26,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [apiErrorMessage, setApiErrorMessage] = useState('');
   const navigate = useNavigate();
- const location = useLocation()
+  const location = useLocation();
   useEffect(() => {
     checkToken();
   }, []);
@@ -67,7 +67,7 @@ function App() {
       .then((res) => {
         setIsLoggedIn(true);
         setCurrentUser(res);
-        navigate(location.pathname, {replace: true})
+        navigate(location.pathname, { replace: true });
       })
       .then(() => mainApi.injectToken())
       .catch((err) => {
@@ -142,8 +142,13 @@ function App() {
       .updateUser(data)
       .then((res) => {
         setCurrentUser(res);
+        console.log(`Текущие данные пользователя:${currentUser}`);
       })
-      .catch((err) => doSomethingOnError(err));
+      .catch((err) => {
+        if(err.status === 409){
+        doSomethingOnError(errorMessages.conflict);
+        } else {doSomethingOnError(errorMessages.internal)}
+      });
   }
 
   function likeCard({ country, director, duration, year, description, image, trailerLink, thumbnail, owner, movieId, nameRU, nameEN }) {
@@ -199,8 +204,8 @@ function App() {
   // };
 
   function findAndDeleteCard(cardId) {
-    const card = likedMovies.find((movie) => movie.movieId === cardId)
-    dislikeCard(card._id)
+    const card = likedMovies.find((movie) => movie.movieId === cardId);
+    dislikeCard(card._id);
   }
 
   function showApiError(onError, message) {

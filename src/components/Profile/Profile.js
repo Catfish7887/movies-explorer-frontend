@@ -18,8 +18,11 @@ function Profile(props) {
   });
 
   function showFormError(err) {
-    setErrMessage(err.message);
-    console.log(err.message);
+    setErrMessage(err);
+
+    return setTimeout(() => {
+      setErrMessage('')
+    }, 2000)
   }
 
   function editProfile(data) {
@@ -27,6 +30,10 @@ function Profile(props) {
     if (errMessage === ''){
       reset({
       }, {keepDefaultValues: false})
+    } else {
+      reset({
+        keepDefaultValues: true
+      })
     }
   }
 

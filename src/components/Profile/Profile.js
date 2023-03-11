@@ -88,7 +88,7 @@ function Profile(props) {
           ) : (
             <></>
           )}
-          <button disabled={!(nameInput.isDirty || emailInput.isDirty) || !nameInput.isValid || !emailInput.isValid} aria-label="Редактировать профиль" className={(nameInput.isDirty || emailInput.isDirty) && emailInput.isValid && nameInput.isValid ? 'profile__button profile__button_active' : 'profile__button profile__button_disabled'} type="submit">
+          <button disabled={!(nameInput.isDirty || emailInput.isDirty) || !nameInput.isValid || !emailInput.isValid || isBlocked} aria-label="Редактировать профиль" className={(nameInput.isDirty || emailInput.isDirty) && emailInput.isValid && nameInput.isValid && !isBlocked ? 'profile__button profile__button_active' : 'profile__button profile__button_disabled'} type="submit">
             Редактировать
           </button>
           <button onClick={props.onLogout} aria-label="Выйти из аккаунта" className="profile__button profile__button_red-text" type="button">

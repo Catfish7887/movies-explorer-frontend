@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react"
 import { set } from "react-hook-form";
 
+
+// Набор парметров для валидации. Возвращает валидность поля, объект с ошибками, и состояние dirty
+// Эта функция отвечается за работу валидации
 const useValidator = (defaultValue, value, validations) => {
-  const emailRegExp = /[a-zA-Z0-9\.-\/-_~:\/?#\[\]!$&'()*+,;=]+@[a-zA-Z0-9\.-\/-_~:\/?#\[\]!$&'()*+,;=]+\.[a-zA-Z0-9\.-\/-_~:\/?#\[\]!$&'()*+,;=]+/i;
-  const nameRegExp = /^[А-Яёа-яёA-Za-z][а-яёА-ЯёA-Za-z \s '-]+/i;
+  // Eslint ругается на регулярки, отключу следующие две строчки
+  const emailRegExp = /[a-zA-Z0-9\.-\/-_~:\/?#\[\]!$&'()*+,;=]+@[a-zA-Z0-9\.-\/-_~:\/?#\[\]!$&'()*+,;=]+\.[a-zA-Z0-9\.-\/-_~:\/?#\[\]!$&'()*+,;=]+/i; //eslint-disable-line
+  const nameRegExp = /^[А-Яёа-яёA-Za-z][а-яёА-ЯёA-Za-z \s '-]+/i; //eslint-disable-line
   const [isDirty, setIsDirty] = useState(false)
   const [errors, setErrors] = useState({})
   const isName = nameRegExp.test(value)
@@ -48,6 +52,8 @@ const useValidator = (defaultValue, value, validations) => {
     return {errors, isDirty, isValid}
 }
 
+// С помощью этой функции валидатор читает значение поля формы и валидирует его
+// Возвращает два метода и данные, возвращаемые валидатором
 export const useValidation = (defaultValue, validations) => {
   const [value, setValue] = useState(defaultValue);
   const [defaultInputValue, setDefaultInputValue] = useState(defaultValue)

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { set } from "react-hook-form";
 
 
 // Набор парметров для валидации. Возвращает валидность поля, объект с ошибками, и состояние dirty

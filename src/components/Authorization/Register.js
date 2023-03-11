@@ -35,7 +35,7 @@ function Register(props) {
         <form onSubmit={handleSubmit(createUser)} className="authorization__form">
           <label htmlFor="username-input" className="authorization__form-label">
             Имя
-            <input
+            <input disabled = {isFetchPending}
             placeholder={'Имя'}
               type={'text'}
               className={errors.name ? 'authorization__form-input authorization__form-input_invalid' : 'authorization__form-input'}
@@ -56,7 +56,7 @@ function Register(props) {
 
           <label htmlFor="email-input" className="authorization__form-label">
             E-mail
-            <input
+            <input disabled ={isFetchPending}
               placeholder={'Электронная почта'}
               type={'email'}
               className={errors.email ? 'authorization__form-input authorization__form-input_invalid' : 'authorization__form-input'}

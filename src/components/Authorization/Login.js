@@ -38,7 +38,7 @@ function Login(props) {
         <form onSubmit={handleSubmit(login)} className="authorization__form">
           <label htmlFor="email" className="authorization__form-label">
             E-mail
-            <input
+            <input disabled = {isFetchPending}
               placeholder={'Электронная почта'}
               type={'email'}
               className={errors.email ? 'authorization__form-input authorization__form-input_invalid' : 'authorization__form-input'}
@@ -55,7 +55,7 @@ function Login(props) {
 
           <label htmlFor="password" className="authorization__form-label">
             Пароль
-            <input
+            <input disabled = {isFetchPending}
               placeholder={'Пароль'}
               type={'password'}
               className={errors.password ? 'authorization__form-input authorization__form-input_invalid' : 'authorization__form-input'}

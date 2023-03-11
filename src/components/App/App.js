@@ -52,6 +52,7 @@ function App() {
           setIsLoggedIn(false);
           navigate('/');
           setApiErrorMessage(errorMessages.internal);
+          console.log(err)
         });
     }
     return;

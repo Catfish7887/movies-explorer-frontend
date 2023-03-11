@@ -52,7 +52,7 @@ function App() {
           setIsLoggedIn(false);
           navigate('/');
           setApiErrorMessage(errorMessages.internal);
-          console.log(err)
+          console.log(err);
         });
     }
     return;
@@ -139,26 +139,30 @@ function App() {
   }
 
   function editUser(data, doSomethingOnError, onReqSuccess, blockInputs, reset) {
-    blockInputs(true)
+    blockInputs(true);
     mainApi
       .updateUser(data)
       .then((res) => {
         setCurrentUser(res);
         onReqSuccess();
-        reset({name: res.name, email: res.email})
+        reset({ name: res.name, email: res.email });
       })
       .catch((err) => {
-        if(err.status === 409){
-        doSomethingOnError(errorMessages.conflict);
-        } else {doSomethingOnError(errorMessages.internal)}
+        if (err.status === 409) {
+          doSomethingOnError(errorMessages.conflict);
+        } else if (err.status === 400) {
+          doSomethingOnError(errorMessages.badRequest);
+        } else {
+          doSomethingOnError(errorMessages.internal);
+        }
       })
       .finally(() => {
-        blockInputs(false)
-      })
+        blockInputs(false);
+      });
   }
 
   function likeCard({ country, director, duration, year, description, image, trailerLink, thumbnail, owner, movieId, nameRU, nameEN }, fetchPendingState) {
-    fetchPendingState(true)
+    fetchPendingState(true);
     mainApi
       .likeCard({ country, director, duration, year, description, image, trailerLink, thumbnail, owner, movieId, nameRU, nameEN })
       .then((card) => {
@@ -167,18 +171,18 @@ function App() {
       .catch((err) => {
         setApiErrorMessage(errorMessages.internal);
       })
-      .finally(()=> fetchPendingState(false))
+      .finally(() => fetchPendingState(false));
   }
 
   function dislikeCard(id, fetchPendingState) {
-    fetchPendingState(true)
+    fetchPendingState(true);
     mainApi
       .dislikeCard(id)
       .then((removedCard) => {
         setLikedMovies(likedMovies.filter((card) => card.movieId !== removedCard.movieId));
       })
       .catch((err) => setApiErrorMessage(errorMessages.internal))
-      .finally(()=> fetchPendingState(false));
+      .finally(() => fetchPendingState(false));
   }
 
   function openNavPopup() {
@@ -215,7 +219,7 @@ function App() {
 
   function findAndDeleteCard(cardId, reqPending) {
     const card = likedMovies.find((movie) => movie.movieId === cardId);
-    dislikeCard(card._id ,reqPending);
+    dislikeCard(card._id, reqPending);
   }
 
   function showApiError(onError, message) {

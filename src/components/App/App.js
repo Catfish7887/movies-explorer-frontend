@@ -137,18 +137,28 @@ function App() {
       });
   }
 
-  function editUser(data, doSomethingOnError, onReqSuccess) {
+  function editUser(data, doSomethingOnError, onReqSuccess, blockInputs, reset) {
+    const email = currentUser.email
+    blockInputs(true)
+    console.log(1)
     mainApi
       .updateUser(data)
       .then((res) => {
         setCurrentUser(res);
         onReqSuccess();
+        reset(res)
       })
       .catch((err) => {
         if(err.status === 409){
         doSomethingOnError(errorMessages.conflict);
+        reset({email: email}, {
+          keepDirtyValues: true
+        })
         } else {doSomethingOnError(errorMessages.internal)}
-      });
+      })
+      .finally(() => {
+        blockInputs(false)
+      })
   }
 
   function likeCard({ country, director, duration, year, description, image, trailerLink, thumbnail, owner, movieId, nameRU, nameEN }) {

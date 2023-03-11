@@ -12,6 +12,11 @@
   transition: all 0.2s linear;
 }
 
+  .popup_type_error{
+    justify-content: center;
+    align-items: center;
+  }
+
 .popup_opened {
   visibility: visible;
 }
@@ -25,6 +30,22 @@
   align-items: center;
   transition: margin 0.5s ease;
   margin-right: -520px;
+}
+
+.popup__container_type_error {
+  max-width: 354px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  box-sizing: border-box;
+  position: relative;
+  padding: 34px 36px 37px;
+  max-height: 300px;
+  margin-right: -140%;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
 }
 
 .popup__container_opened {
@@ -41,8 +62,22 @@
   border: none;
 }
 
+.popup__close-btn_hidden{
+  visibility: hidden;
+}
+
+.popup__close-btn_type_error {
+  top: -34.56px;
+  right: -34.56px;
+}
+
 .popup__close-btn:hover {
   opacity: 0.7;
+}
+
+.popup_type_error {
+  align-items: center;
+  justify-content: center;
 }
 
 @media screen and (max-width: 767px) {

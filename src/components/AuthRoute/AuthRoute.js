@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom";
 
 const AuthRoute = ({ isLoggedIn, component }) => {
   if (isLoggedIn) {
-    return (<Navigate to="/profile" replace />);
+    return (<Navigate to='/movies' replace />);
   }
 
   return component;

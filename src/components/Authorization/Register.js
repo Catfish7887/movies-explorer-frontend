@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-
-function Register() {
+function Register(props) {
+  const [apiError, setApiError] = useState('')
+  const  [isFetchPending, setIsFetchPending] = useState(false)
   const {
     register,
     formState: { errors, isValid },
@@ -10,8 +12,8 @@ function Register() {
     mode: 'onChange',
   });
 
-  function reg(data) {
-    console.log(data, isValid, errors);
+  function createUser(data) {
+    props.onSubmit(data, setIsFetchPending, setApiError);
   }
 
   return (
@@ -30,15 +32,19 @@ function Register() {
         <h1 className="authorization__title">Добро пожаловать!</h1>
       </header>
       <main className="authorization__main">
-        <form onSubmit={handleSubmit(reg)} className="authorization__form">
+        <form onSubmit={handleSubmit(createUser)} className="authorization__form">
           <label htmlFor="username-input" className="authorization__form-label">
             Имя
-            <input
+            <input disabled = {isFetchPending}
             placeholder={'Имя'}
               type={'text'}
               className={errors.name ? 'authorization__form-input authorization__form-input_invalid' : 'authorization__form-input'}
               {...register('name', {
                 required: 'Поле должно быть заполнено',
+                pattern: {
+                  value: /^[А-Яёа-яёA-Za-z][а-яёА-ЯёA-Za-z \s '-]+/,
+                  message: 'Имя может состоять только из латинских, русских букв, дефиса и пробела',
+                },
                 minLength: {
                   value: 2,
                   message: 'Должно быть минимум 2 символа',
@@ -50,7 +56,7 @@ function Register() {
 
           <label htmlFor="email-input" className="authorization__form-label">
             E-mail
-            <input
+            <input disabled ={isFetchPending}
               placeholder={'Электронная почта'}
               type={'email'}
               className={errors.email ? 'authorization__form-input authorization__form-input_invalid' : 'authorization__form-input'}
@@ -69,7 +75,7 @@ function Register() {
             Пароль
             <input
             placeholder={'Пароль'}
-              type={'password'}
+               type={'password'}
               className={errors.password ? 'authorization__form-input authorization__form-input_invalid' : 'authorization__form-input'}
               {...register('password', {
                 required: 'Поле должно быть заполнено',
@@ -77,8 +83,8 @@ function Register() {
             />
             <span className={errors.password ? 'authorization__form-error' : 'authorization__form-error_hidden'}>{errors.password?.message || 'что-то не так'}</span>
           </label>
-
-          <button disabled={!isValid} className={isValid && Object.keys(errors).length === 0 ? 'authorization__form-submit authorization__form-submit_enabled' : 'authorization__form-submit authorization__form-submit_disabled'} type="submit">
+          <span className='authorization__form-error authrorization__api-error'>{apiError}</span>
+          <button disabled={!isValid || apiError !== '' || isFetchPending} className={(isValid && apiError ==='' && Object.keys(errors).length === 0 && !isFetchPending) ? 'authorization__form-submit authorization__form-submit_enabled' : 'authorization__form-submit authorization__form-submit_disabled'} type="submit">
             Зарегистрироваться
           </button>
         </form>

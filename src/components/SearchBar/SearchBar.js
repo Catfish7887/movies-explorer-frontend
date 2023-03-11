@@ -1,4 +1,16 @@
-function SearchBar() {
+import { useRef } from "react";
+
+function SearchBar(props) {
+
+  const {formData} = props;
+  const inputText = useRef(null);
+  const checkbox = useRef(null);
+  function findFilms(e){
+    e.preventDefault()
+    // props.onSubmit(inputText.current.value, checkbox.current.checked)
+    props.onSubmit(inputText.current.value, checkbox.current.checked)
+  };
+
   return (
     <div className="searchbar">
       <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -9,16 +21,16 @@ function SearchBar() {
           fill="#959595"
         />
       </svg>
-      <form className="searchform">
+      <form onSubmit={findFilms} className="searchform">
         <div className="searchform__input-container">
-          <input type="text" name="film-input" placeholder="Фильм" className="searchform__input" />
-          <button type="submit" className="searchform__submit-button">
+          <input defaultValue={formData?.text || ''} ref={inputText} type="text" name="film-input" placeholder="Фильм" className="searchform__input" />
+          <button disabled={props.disabled} type="submit" className={props.disabled ? "searchform__submit-button searchform__submit-button_disabled" : "searchform__submit-button searchform__submit-button_active"}>
             Найти
           </button>
         </div>
         <div className="searchform__checkbox-container">
           <label className="searchform__label">
-            <input className="searchform__checkbox" type="checkbox" name="film-checkbox" />
+            <input defaultChecked={formData.checkbox} ref={checkbox} className="searchform__checkbox" type="checkbox" name="film-checkbox" />
             <span className="searchform__checkbox-toggle"></span>
           </label>
           <span className="searchform__checkbox-span">Короткометражки</span>

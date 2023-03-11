@@ -1,9 +1,11 @@
+import { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import isLoggedInContext from '../../contexts/isLoggedInContext';
 import NavBar from '../NavBar/NavBar';
 
 function Header(props) {
-  const { isLoggedIn } = props;
-
+  const isLoggedIn = useContext(isLoggedInContext);
+  
   return (
     <header className={window.location.pathname === '/' ? 'header header_page_landing' : 'header'}>
       <nav>

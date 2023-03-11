@@ -24,6 +24,7 @@
   align-items: flex-start;
   max-width: 396px;
   margin: 0 auto 0;
+  position: relative;
 }
 
 .authorization__form-label {
@@ -132,6 +133,12 @@
 
 .authorization__footer-link:hover{
   opacity: 0.7;
+}
+
+.authrorization__api-error{
+  position: absolute;
+  bottom: 75px;
+
 }
 
 @media screen and (max-width: 1279px) {

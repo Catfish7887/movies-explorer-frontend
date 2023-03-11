@@ -22,13 +22,15 @@
   justify-content: center;
 }
 
+.cards__error-span{
+  color: #ee3465;
+}
+
+.cards__span{
+  color: #424242;
+}
+
 @media screen and (max-width: 1279px) {
-  .cardlist {
-    display: grid;
-    grid-template-rows: minmax(min-content, max-content);
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px 30px;
-  }
 
   .cards {
     padding: 80px 30px 30px;
@@ -37,6 +39,15 @@
 
   .cards_saved {
     padding-bottom: 249px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .cardlist {
+    display: grid;
+    grid-template-rows: minmax(min-content, max-content);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px 30px;
   }
 }
 

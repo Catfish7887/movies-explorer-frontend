@@ -138,22 +138,17 @@ function App() {
   }
 
   function editUser(data, doSomethingOnError, onReqSuccess, blockInputs, reset) {
-    const email = currentUser.email
     blockInputs(true)
-    console.log(1)
     mainApi
       .updateUser(data)
       .then((res) => {
         setCurrentUser(res);
         onReqSuccess();
-        reset(res)
+        reset({name: res.name, email: res.email})
       })
       .catch((err) => {
         if(err.status === 409){
         doSomethingOnError(errorMessages.conflict);
-        reset({email: email}, {
-          keepDirtyValues: true
-        })
         } else {doSomethingOnError(errorMessages.internal)}
       })
       .finally(() => {

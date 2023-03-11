@@ -3,15 +3,20 @@ import { set } from "react-hook-form";
 
 const useValidator = (defaultValue, value, validations) => {
   const emailRegExp = /[a-zA-Z0-9\.-\/-_~:\/?#\[\]!$&'()*+,;=]+@[a-zA-Z0-9\.-\/-_~:\/?#\[\]!$&'()*+,;=]+\.[a-zA-Z0-9\.-\/-_~:\/?#\[\]!$&'()*+,;=]+/i;
-  const nameRegExp = /^[А-ЯЁа-яёa-zA-Z \s '-]+/i;
+  const nameRegExp = /^[А-Яёа-яёA-Za-z][а-яёА-ЯёA-Za-z \s '-]+/i;
   const [isDirty, setIsDirty] = useState(false)
   const [errors, setErrors] = useState({})
-
+  const isName = nameRegExp.test(value)
+  const isEmail = emailRegExp.test(value)
   const isValid = Object.keys(errors).length === 0;
 
-  useEffect(()=>{
-    const totalErrors = {}
+  useEffect(() => {
     value === defaultValue ? setIsDirty(false) : setIsDirty(true);
+  }, [defaultValue])
+
+  useEffect(()=>{
+    value === defaultValue ? setIsDirty(false) : setIsDirty(true);
+    const totalErrors = {}
     for (const validation in validations) {
       switch(validation){
         case 'minLength':
@@ -23,11 +28,12 @@ const useValidator = (defaultValue, value, validations) => {
         break
 
         case 'name':
-          value.match(nameRegExp) ? delete totalErrors.name : errors.name = 'Некорретно введённые данные';
+          !isName ? totalErrors.name = 'Некорретно введённые данные' : delete totalErrors.name;
+
         break
 
         case 'email':
-          value.match(emailRegExp)  ? delete totalErrors.email : totalErrors.email = 'E-mail должен быть вида email@example.com';
+          isEmail  ? delete totalErrors.email : totalErrors.email = 'E-mail должен быть вида email@example.com';
         break
 
         default:
@@ -39,22 +45,24 @@ const useValidator = (defaultValue, value, validations) => {
 
     }
   }, [value])
-
-  return {errors, isDirty, isValid}
+    return {errors, isDirty, isValid}
 }
 
 export const useValidation = (defaultValue, validations) => {
   const [value, setValue] = useState(defaultValue);
-  const input = useValidator(defaultValue, value, validations)
+  const [defaultInputValue, setDefaultInputValue] = useState(defaultValue)
+  const input = useValidator(defaultInputValue, value, validations)
 
   const onChange = (e) => {
     setValue(e.target.value)
   }
 
-  const reset = (e) => {
-    setValue(defaultValue)
-    e.value = defaultValue
+  const reset = (value) => {
+    // debugger
+    setDefaultInputValue(value)
+    setValue(value)
   }
+
 
   return {
     onChange,
